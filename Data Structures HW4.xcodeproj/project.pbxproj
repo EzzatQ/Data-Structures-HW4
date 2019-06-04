@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		528A65E322A67336008BC0FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 528A65E222A67336008BC0FF /* main.cpp */; };
+		528A65ED22A67532008BC0FF /* main2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 528A65EA22A67532008BC0FF /* main2.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,10 @@
 
 /* Begin PBXFileReference section */
 		528A65DF22A67336008BC0FF /* Data Structures HW4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Data Structures HW4"; sourceTree = BUILT_PRODUCTS_DIR; };
-		528A65E222A67336008BC0FF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		528A65E922A67531008BC0FF /* in2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = in2.txt; sourceTree = "<group>"; };
+		528A65EA22A67532008BC0FF /* main2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main2.cpp; sourceTree = "<group>"; };
+		528A65EB22A67532008BC0FF /* library2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = library2.h; sourceTree = "<group>"; };
+		528A65EC22A67532008BC0FF /* out2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = out2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,10 @@
 		528A65E122A67336008BC0FF /* Data Structures HW4 */ = {
 			isa = PBXGroup;
 			children = (
-				528A65E222A67336008BC0FF /* main.cpp */,
+				528A65E922A67531008BC0FF /* in2.txt */,
+				528A65EB22A67532008BC0FF /* library2.h */,
+				528A65EA22A67532008BC0FF /* main2.cpp */,
+				528A65EC22A67532008BC0FF /* out2.txt */,
 			);
 			path = "Data Structures HW4";
 			sourceTree = "<group>";
@@ -118,7 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				528A65E322A67336008BC0FF /* main.cpp in Sources */,
+				528A65ED22A67532008BC0FF /* main2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
