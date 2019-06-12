@@ -81,7 +81,7 @@ public:
 		if(size == 0)
 			throw ArrayEmpty();
 		root[--size] = initialValue;
-		if(size <= (maxSize/4)){
+		if(size <= (maxSize/(expandFactor*2))){
 			T* temp = new T[maxSize / expandFactor];
 			if(maxSize > expandFactor) maxSize = (maxSize/expandFactor);
 			for(int i = 0; i < maxSize; i++){
