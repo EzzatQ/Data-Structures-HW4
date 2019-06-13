@@ -22,7 +22,7 @@ class dynamicArray {
 	int expandFactor;
 	const T& initialValue;
 public:
-	explicit dynamicArray(int n = 10, int max = 10 , int factor = 2, const T& init = T()): maxSize (max), size(n), initialValue(init), expandFactor(factor){
+	explicit dynamicArray(int n = 10, const T& init = T(), int max = 10 , int factor = 2): maxSize (max), size(n), initialValue(init), expandFactor(factor){
 		if(maxSize < size) maxSize = size + 10;
 		root = new T[maxSize];
 		for(int i = 0; i < maxSize; i++){
@@ -92,7 +92,7 @@ public:
 		}
 	}
 	T& operator[](int i){
-		if(i < 0 || i > size - 1) throw OutOfBounds();
+		if(i < 0 || i >= size) throw OutOfBounds();
 		return root[i];
 	}
 	const T& operator[](int i) const {
