@@ -32,13 +32,16 @@ public:
 		this->key = uf.key;
 		this->parent = uf.parent;
 		T temp(*uf.data);
+        // should delete old data
 		this->data = &temp;
 		this->unionSize = uf.unionSize;
 	}
 	UFNode& operator=(UFNode& uf){
+        //check if its already the same
 		*this(uf);
 		return *this;
 	}
+    
 	~UFNode(){
 		delete data;
 	}
@@ -130,6 +133,7 @@ public:
 		if(rootX == rootY) return;
 		int sizeX = arr[rootX - 1]->getSize();
 		int sizeY = arr[rootY - 1]->getSize();
+        //sizes should be updated in the new united group
 		if(sizeX >= sizeY){
 			arr[rootY - 1]->setParent(arr[rootX - 1]);
 		} else {
