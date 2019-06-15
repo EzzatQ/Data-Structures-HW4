@@ -12,76 +12,50 @@
 #include <stdio.h>
 #include "DataNode.hpp"
 #include "Exceptions.hpp"
-
 namespace DataStructures{
     template <class D>
     class hashTable{
         dataNode<int, D> **array;
-        int * a;
-        int * b;
-        int btop;
         int size;
         int items;
         
-        bool isInit(int m){
-            if(a[m] < size && a[m] >= 0){
-                if(b[a[m]] == m) return true;
-                else return false;
-            }else return false;
-        }
-        void toInit(int m){
-            a[m] = btop;
-            b[btop] = m;
-            btop = btop + 1;
-        }
+
+
         void shrinkOrExpand(int t){
             dataNode<int, D> ** old_array = array;
             int old_size = size;
-            int * old_a = a;
-            int * old_b = b;
             if(t == 1) size = size * 2;
-            else if(size >= 20) size = size / 2;
-            a = new (std::nothrow) int[size];
-            if(!a) throw OutOfMemory();
-            b = new (std::nothrow) int[size];
-            if(!b){
-                delete [] old_a;
-                throw OutOfMemory();
-            }
+            else    size = size / 2;
             array = new (std::nothrow) dataNode<int, D>*[size];
-            if(!array) {
-                delete [] old_a;
-                delete [] old_b;
-                throw OutOfMemory();
+            if(!array) {throw OutOfMemory();}
+            for (int i = 0; i < size; i++) {
+                array[i] = nullptr;
             }
+            
             items = 0;
             
             //// moving the data to the new array
             for(int i = 0; i < old_size ; i++){
-                if((old_a[i] < old_size && old_b[old_a[i]] == i)){
+                if(old_array[i]){
                     dataNode<int, D> * curr = old_array[i];
                     while(curr){
                         try{
                             insert(curr->getKey(), curr->getData());
                         }catch(OutOfMemory a){
-                            emptyAnArray(old_a, old_b, old_array, old_size);
-                            delete [] old_a;
-                            delete [] old_b;
+                            emptyAnArray(old_array, old_size);
                             delete [] old_array;
                         }
                         curr = curr->getNext();
                     }
                 }
             }
-            emptyAnArray(old_a, old_b, old_array, old_size);
-            delete [] old_a;
-            delete [] old_b;
+            emptyAnArray(old_array, old_size);
             delete [] old_array;
         }
         
-        void emptyAnArray(int * a, int * b, dataNode<int, D> ** array, int old_size){
+        void emptyAnArray(dataNode<int, D> ** array, int old_size){
             for (int i = 0; i < old_size; i++) {
-                if((a[i] < old_size  && a[i]>=0 && b[a[i]] == i)){
+                if(array[i]){
                     dataNode<int, D> * curr = array[i];
                     while(curr){
                         dataNode<int, D> * tmp = curr->getNext();
@@ -92,17 +66,18 @@ namespace DataStructures{
             }
         }
     public:
-		hashTable(int n = 10): size(n){
+        hashTable(int n = 10): size(n){
             array = new (std::nothrow) dataNode<int, D>*[n];
             if(!array) throw OutOfMemory();
-            a = new int[n];
-            b = new int[n];
+            for (int i = 0; i < size; i++) {
+                array[i] = nullptr;
+            }
             items = 0;
-            btop = 0;
+
         }
         dataNode<int, D> * find(int key){
             int place = (key % size);
-            if(isInit(place)){
+            if(array[place]){
                 dataNode<int, D>* ptr = array[place];
                 while(ptr){
                     if(ptr->getKey() == key) return ptr;
@@ -116,19 +91,14 @@ namespace DataStructures{
             int place = (key % size);
             dataNode<int, D>* new_n = new (std::nothrow) dataNode<int, D>(key, data);
             if(!new_n) throw OutOfMemory();
-            if(isInit(place)){
                 new_n->setNext(array[place]);
                 array[place] = new_n;
-            } else{
-                toInit(place);
-                array[place] = new_n;
-            }
             items++;
         }
         void remove(int key){
             if( size/4 >= items) shrinkOrExpand(0);
             int place = (key % size);
-            if(isInit(place)){
+            if(array[place]){
                 if(array[place]->getKey() == key){
                     dataNode<int, D>* tmp = array[place]->getNext;
                     delete array[place];
@@ -150,17 +120,16 @@ namespace DataStructures{
         }
 
         ~hashTable(){
-            emptyAnArray(a, b, array, size);
-            delete [] a;
-            delete [] b;
+            
             delete [] array;
         }
     };
 };
 
 
-
-
-
 #endif /* hash_table_hpp */
+
+
+
+
 
