@@ -36,6 +36,7 @@ public:
 		this->unionSize = uf.unionSize;
 	}
 	UFNode& operator=(UFNode& uf){
+		if(this->data) delete this->data;
 		*this(uf);
 		return *this;
 	}
