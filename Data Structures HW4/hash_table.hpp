@@ -18,8 +18,6 @@ namespace DataStructures{
         dataNode<int, D> **array;
         int size;
         int items;
-        
-
 
         void shrinkOrExpand(int t){
             dataNode<int, D> ** old_array = array;
@@ -100,12 +98,12 @@ namespace DataStructures{
             int place = (key % size);
             if(array[place]){
                 if(array[place]->getKey() == key){
-                    dataNode<int, D>* tmp = array[place]->getNext;
+					dataNode<int, D>* tmp = array[place]->getNext();
                     delete array[place];
                     items--;
                     array[place] = tmp;
                 }else{
-                    for (dataNode<int, D>* prev = array[place] , curr; prev; prev = prev->getNext()) {
+                    for (dataNode<int, D>* prev = array[place] ,* curr = prev; prev; prev = prev->getNext()) {
                         curr = prev->getNext();
                         if(curr->getKey() == key){
                             prev->setNext(curr->getNext());

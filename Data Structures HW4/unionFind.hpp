@@ -26,7 +26,7 @@ namespace DataStructures{
 		int unionSize;
 
 	public:
-		UFNode(int k, T* dat, UFNode* par = nullptr):key(k), data(nullptr), parent(par), unionSize(1){
+		UFNode(int k, T* dat = nullptr, UFNode* par = nullptr):key(k), data(nullptr), parent(par), unionSize(1){
 			try { data = new T(*dat);} catch (std::bad_alloc e){ throw OutOfMemory();}
 		}
 		explicit UFNode() { *this = nullptr;}
@@ -121,6 +121,7 @@ namespace DataStructures{
 		}
 
 		int find(int x){
+			if(x > size) return -1;
 			UFNode<T>* parentX = arr[x - 1];
 			UFNode<T>* next = arr[x - 1]->getParent();
 			while(next){

@@ -22,12 +22,13 @@ namespace DataStructures{
         D* data;
         dataNode* next;
     public:
-        dataNode(const K& key, D& data): key(nullptr), data(nullptr),next(nullptr){
+        dataNode(const K& key, D& data = D()): key(nullptr), data(nullptr),next(nullptr){
             try{
                 this->key = new K(key);
                 this->data = new D(data);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
+		
         dataNode(dataNode& n){
             try{
                 this->key = new K(*n.key);

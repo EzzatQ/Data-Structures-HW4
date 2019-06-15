@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5228243722B5012E006F31EA /* DynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A963122B00FB9003159F2 /* DynamicArray.cpp */; };
+		520B69A822B5653600CC94D3 /* unionFind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962E22B00691003159F2 /* unionFind.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +23,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		520B69A922B5683D00CC94D3 /* hash_table.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash_table.hpp; sourceTree = "<group>"; };
+		520B69AA22B56B5500CC94D3 /* Exceptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Exceptions.hpp; sourceTree = "<group>"; };
+		520B69AB22B56B5500CC94D3 /* DataNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataNode.hpp; sourceTree = "<group>"; };
 		524A962B22B004AC003159F2 /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
 		524A962C22B004DC003159F2 /* library2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = library2.cpp; sourceTree = "<group>"; };
 		524A962E22B00691003159F2 /* unionFind.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = unionFind.cpp; sourceTree = "<group>"; };
@@ -73,6 +76,9 @@
 				528A65EB22A67532008BC0FF /* library2.h */,
 				524A963122B00FB9003159F2 /* DynamicArray.cpp */,
 				524A963222B00FB9003159F2 /* DynamicArray.hpp */,
+				520B69A922B5683D00CC94D3 /* hash_table.hpp */,
+				520B69AB22B56B5500CC94D3 /* DataNode.hpp */,
+				520B69AA22B56B5500CC94D3 /* Exceptions.hpp */,
 				524A962E22B00691003159F2 /* unionFind.cpp */,
 				524A962F22B00691003159F2 /* unionFind.hpp */,
 				524A962B22B004AC003159F2 /* AVL.hpp */,
@@ -136,7 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5228243722B5012E006F31EA /* DynamicArray.cpp in Sources */,
+				520B69A822B5653600CC94D3 /* unionFind.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
