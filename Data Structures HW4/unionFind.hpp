@@ -14,139 +14,146 @@
 #include <string.h>
 #include <iostream>
 #include "DynamicArray.hpp"
+#include "Exceptions.hpp"
 
-template<class T>
-class UFNode{
-	int key;
-	T* data;
-	UFNode* parent;
-	int unionSize;
 
-public:
-	UFNode(int k, T* dat, UFNode* par = NULL):key(k), parent(par), unionSize(1){
-		data = new T(*dat);
-	}
-	explicit UFNode() { *this = NULL;}
+namespace DataStructures{
+	template<class T>
+	class UFNode{
+		int key;
+		T* data;
+		UFNode* parent;
+		int unionSize;
 
-	UFNode(UFNode& uf){
-		this->key = uf.key;
-		this->parent = uf.parent;
-		T temp(*uf.data);
-        // should delete old data
-		this->data = &temp;
-		this->unionSize = uf.unionSize;
-	}
-	UFNode& operator=(UFNode& uf){
-		//check if its alreay the same
-		if(this->data) delete this->data;
-		*this(uf);
-		return *this;
-	}
-
-	~UFNode(){
-		delete data;
-	}
-
-	int getKey() {return key;}
-
-	int getSize() const {return unionSize;}
-
-	UFNode* getParent() const {return parent;}
-
-	void setParent(UFNode* uf){
-		if(this->parent){
-			this->parent->unionSize -= this->unionSize;
+	public:
+		UFNode(int k, T* dat, UFNode* par = nullptr):key(k), data(nullptr), parent(par), unionSize(1){
+			try { data = new T(*dat);} catch (std::bad_alloc e){ throw OutOfMemory();}
 		}
-		this->parent = uf;
-		if(uf) uf->unionSize += this->unionSize;
-	}
+		explicit UFNode() { *this = nullptr;}
 
-	T* getData() const {return data;}
-	void setData(T* dat){
-		T temp(*dat);
-		data = &temp;
-	}
-
-};
-
-class UFinfo{
-public:
-	int groupSize;
-
-	UFinfo(int grSize): groupSize(grSize){}
-};
-
-template<class K,class T>
-class unionFind{
-	UFNode<T>** arr;
-	int size;
-
-public:
-	unionFind(int n, T data[]): size(n){
-		arr = new UFNode<T>*[size];
-		for(int i = 0; i < size; i++){
-			UFNode<T>* tempNode = new UFNode<T>(i + 1, &data[i]);
-			arr[i] = tempNode;
-
+		UFNode(UFNode& uf){
+			this->key = uf.key;
+			this->parent = uf.parent;
+			try {this->data = new T(*uf.data);} catch (std::bad_alloc e){ throw OutOfMemory();}
+			this->unionSize = uf.unionSize;
 		}
-	}
-
-	unionFind(const unionFind& uf){
-		this->size = uf.size;
-		this->arr = new UFNode<T>*[size];
-		for(int i = 0; i < size ; i++){
-			UFNode<T>* tempNode = new UFNode<T>(*uf.arr[i]);
-			this->arr[i] = tempNode;
+		UFNode& operator=(UFNode& uf){
+			if(*this == uf) return;
+			if(this->data) delete this->data;
+			*this(uf);
+			return *this;
 		}
-	}
-
-	unionFind& operator=(const unionFind& uf){
-		*this(uf);
-		return *this;
-	}
-
-	~unionFind(){
-		for(int i = 0; i < size; i++){
-			delete arr[i];
+		
+		bool operator==(UFNode& uf){
+			return this->key == uf.key && this->data == uf.data && this->parent == uf.parent && this->unionSize == uf.unionSize;
 		}
-	}
 
-	int find(int x){
-		UFNode<T>* parentX = arr[x - 1];
-		UFNode<T>* next = arr[x - 1]->getParent();
-		while(next){
-			parentX = next;
-			next = next->getParent();
+		~UFNode(){
+			delete data;
 		}
-		UFNode<T>* prev = arr[x - 1];
-		next = arr[x - 1]->getParent();
-		while(next){
-			prev->setParent(parentX);
-			prev= next;
-			next = next->getParent();
+
+		int getKey() {return key;}
+
+		int getSize() const {return unionSize;}
+
+		UFNode* getParent() const {return parent;}
+
+		void setParent(UFNode* uf){
+			if(this->parent){
+				this->parent->unionSize -= this->unionSize;
+			}
+			this->parent = uf;
+			if(uf) uf->unionSize += this->unionSize;
 		}
-		return parentX->getKey();
-	}
 
-	void unite(int x, int y){
-		int rootX = find(x);
-		int rootY = find(y);
-		if(rootX == rootY) return;
-		int sizeX = arr[rootX - 1]->getSize();
-		int sizeY = arr[rootY - 1]->getSize();
-        //sizes should be updated in the new united group
-		if(sizeX >= sizeY){
-			arr[rootY - 1]->setParent(arr[rootX - 1]);
-		} else {
-			arr[rootX - 1]->setParent(arr[rootY - 1]);
+		T* getData() const {return data;}
+		void setData(T* dat){
+			T temp(*dat);
+			data = &temp;
 		}
-	}
 
-	T* getData(int i){
-		return arr[i - 1]->getData();
-	}
-};
+	};
 
+	class UFinfo{
+	public:
+		int groupSize;
 
+		UFinfo(int grSize): groupSize(grSize){}
+	};
+
+	template<class K,class T>
+	class unionFind{
+		UFNode<T>** arr;
+		int size;
+
+	public:
+		unionFind(int n, T data[]): size(n){
+			try {
+				arr = new UFNode<T>*[size];
+				for(int i = 0; i < size; i++){
+					UFNode<T>* tempNode = new UFNode<T>(i + 1, &data[i]);
+					arr[i] = tempNode;
+				}
+			} catch (std::bad_alloc e){ throw OutOfMemory();}
+		}
+
+		unionFind(const unionFind& uf){
+			try {
+				this->size = uf.size;
+				this->arr = new UFNode<T>*[size];
+				for(int i = 0; i < size ; i++){
+					UFNode<T>* tempNode = new UFNode<T>(*uf.arr[i]);
+					this->arr[i] = tempNode;
+				}
+			} catch (std::bad_alloc e){ throw OutOfMemory();}
+		}
+
+		unionFind& operator=(const unionFind& uf){
+			*this(uf);
+			return *this;
+		}
+
+		~unionFind(){
+			for(int i = 0; i < size; i++){
+				delete arr[i];
+			}
+			delete arr;
+		}
+
+		int find(int x){
+			UFNode<T>* parentX = arr[x - 1];
+			UFNode<T>* next = arr[x - 1]->getParent();
+			while(next){
+				parentX = next;
+				next = next->getParent();
+			}
+			UFNode<T>* prev = arr[x - 1];
+			next = arr[x - 1]->getParent();
+			while(next){
+				prev->setParent(parentX);
+				prev= next;
+				next = next->getParent();
+			}
+			return parentX->getKey();
+		}
+
+		void unite(int x, int y){
+			int rootX = find(x);
+			int rootY = find(y);
+			if(rootX == rootY) return;
+			int sizeX = arr[rootX - 1]->getSize();
+			int sizeY = arr[rootY - 1]->getSize();
+			if(sizeX >= sizeY){
+				arr[rootY - 1]->setParent(arr[rootX - 1]);
+			} else {
+				arr[rootX - 1]->setParent(arr[rootY - 1]);
+			}
+		}
+
+		T* getData(int i){
+			return arr[i - 1]->getData();
+		}
+	};
+}
 
 #endif /* unionFind_hpp */

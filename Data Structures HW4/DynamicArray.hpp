@@ -21,6 +21,7 @@ class dynamicArray {
 	int maxSize;
 	int expandFactor;
 	const T& initialValue;
+	
 public:
 	explicit dynamicArray(int n = 10, const T& init = T(), int max = 10 , int factor = 2): maxSize (max), size(n), initialValue(init), expandFactor(factor){
 		if(maxSize < size) maxSize = size + 10;

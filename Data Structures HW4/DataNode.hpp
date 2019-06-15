@@ -18,20 +18,20 @@
 namespace DataStructures{
     template< class K, class D>
     class dataNode{
-        K * key;
-        D * data;
+        K* key;
+        D* data;
         dataNode* next;
     public:
         dataNode(const K& key, D& data): key(nullptr), data(nullptr),next(nullptr){
             try{
-                this->key = new (std::nothrow) K(key);
-                this->data = new (std::nothrow) D(data);
+                this->key = new K(key);
+                this->data = new D(data);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         dataNode(dataNode& n){
             try{
-                this->key = new (std::nothrow) K(*n.key);
-                this->data = new (std::nothrow) D(*n.data);
+                this->key = new K(*n.key);
+                this->data = new D(*n.data);
                 next = n->next;
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
@@ -39,38 +39,34 @@ namespace DataStructures{
             if(*this == n) return &this;
             if(this->key) delete this->key;
             if(this->data) delete this->data;
-            this(n);
+            *this(n);
             return &this;
         }
         ~dataNode(){
-            delete key;
-            delete data;
+            if(key) delete key;
+            if(data) delete data;
         }
         
         bool operator==(dataNode* n){
-            return n->key == key && n->data == data;
+            return n->key == key && n->data == data && n->next == next;
         }
         
         K& getKey() { return *key;}
         D& getData() { return *data;}
         D* getDataPtr(){return data;}
         K* getKeyPtr(){return key;}
-        dataNode* getNext(){return next;}
-        void setKey(K& key){
-            if(this->key){
-                delete this->key;
-            }
+		dataNode* getNext(){return next;}
+        void setKey(K& k){
+			if(key) delete key;
             try{
-                this->key = new (std::nothrow) K(key);
+                key = new K(k);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         
-        void setData(D& data){
-            if(this->data){
-                delete this->data;
-            }
+        void setData(D& dat){
+            if(data) delete data;
             try{
-                this->data = new (std::nothrow) D(data);
+                this->data = new D(data);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         void setNext(dataNode* n){next = n;}

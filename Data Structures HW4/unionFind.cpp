@@ -11,22 +11,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
+#include "hash_table.hpp"
 
+
+using namespace DataStructures;
 int main(){
-	int arr[] = {1,2,3,4,5,6,7,8,9,10};
-	unionFind<int,int> uf = unionFind<int,int>(10, arr);
-	uf.unite(1, 3);
-	uf.unite(3, 3);
-	uf.unite(4, 3);
-	uf.unite(5,2);
-	uf.unite(2, 1);
-	std::cout << uf.find(2) << std::endl;
+//	hashTable<unionFind<int, int>> hash = hashTable<unionFind<int, int>>(10);
+//	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+//	unionFind<int,int> uf = unionFind<int,int>(10, arr);
+//	for(int i = 0; i < 20; i++){
+//		unionFind<int,int> temp(uf);
+//		hash.insert(i, uf);
+//	}
+	hashTable<int> hash = hashTable<int>(10);
+	for(int i = 0; i < 8; i++){
+		hash.insert(i, i);
+	}
+	hashTable<int> hash2(hash);
 	
-	std::cout << uf.find(6) << std::endl;
-	std::cout << uf.find(7) << std::endl;
-	uf.unite(8, 9);
-	std::cout << uf.find(9) << std::endl;
-	uf.unite(4, 10);
-	std::cout << uf.find(10) << std::endl;
-	std::cout << (*uf.getData(10)) << std::endl;
 }

@@ -33,16 +33,16 @@ namespace DataStructures{
         void setHeight(int newh){if(newh > 0) height = newh;}
 		node(const K& key, D& data): key(nullptr), data(nullptr), parent(nullptr), left(nullptr), right(nullptr), kids(0), BF(0), height(0){
 			try{
-				this->key = new (std::nothrow) K(key);
-				this->data = new (std::nothrow) D(data);
+				this->key = new K(key);
+				this->data = new D(data);
 			} catch (std::bad_alloc e){ throw OutOfMemory();}
 		}
 		
 
         node(node& n){
             try{
-                this->key = new (std::nothrow) K(*n.key);
-                this->data = new (std::nothrow) D(*n.data);
+                this->key = new K(*n.key);
+                this->data = new D(*n.data);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
             this->parent = n.parent;
             this->left = n.left;

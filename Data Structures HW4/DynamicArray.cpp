@@ -26,8 +26,11 @@ void fill(dynamicArray<T>& d, int to){
 
 int main(){
 	dynamicArray<int> a = dynamicArray<int>(0);
+	fill(a,20);
+	printDyn(a);
 	dynamicArray<int> b(a);
 	dynamicArray<int> c = dynamicArray<int>(15);
+	c = a;
 	printDyn(a);
 	printDyn(b);
 	printDyn(c);

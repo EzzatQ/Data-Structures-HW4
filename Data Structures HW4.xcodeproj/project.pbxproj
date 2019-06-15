@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		524A963422B01F15003159F2 /* unionFind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962E22B00691003159F2 /* unionFind.cpp */; };
+		5228243722B5012E006F31EA /* DynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A963122B00FB9003159F2 /* DynamicArray.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,7 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				524A963422B01F15003159F2 /* unionFind.cpp in Sources */,
+				5228243722B5012E006F31EA /* DynamicArray.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

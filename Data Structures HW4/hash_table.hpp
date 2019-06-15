@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "DataNode.hpp"
 #include "Exceptions.hpp"
+
 namespace DataStructures{
     template <class D>
     class hashTable{
@@ -39,7 +40,7 @@ namespace DataStructures{
             int * old_a = a;
             int * old_b = b;
             if(t == 1) size = size * 2;
-            else    size = size / 2;
+            else if(size >= 20) size = size / 2;
             a = new (std::nothrow) int[size];
             if(!a) throw OutOfMemory();
             b = new (std::nothrow) int[size];
@@ -91,12 +92,11 @@ namespace DataStructures{
             }
         }
     public:
-        hashTable(){
-            array = new (std::nothrow) dataNode<int, D>*[10];
+		hashTable(int n = 10): size(n){
+            array = new (std::nothrow) dataNode<int, D>*[n];
             if(!array) throw OutOfMemory();
-            a = new int[10];
-            b = new int[10];
-            size = 10;
+            a = new int[n];
+            b = new int[n];
             items = 0;
             btop = 0;
         }
