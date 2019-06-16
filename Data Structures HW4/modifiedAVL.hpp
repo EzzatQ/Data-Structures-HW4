@@ -1,10 +1,4 @@
-//
-//  AVL.hpp
-//  Data Structures HW2
-//
-//  Created by Ezzat Qupty on 16/04/2019.
-//  Copyright © 2019 Ezzat Qupty. All rights reserved.
-//
+
 
 #ifndef AVL_hpp
 #define AVL_hpp
@@ -27,6 +21,8 @@ namespace DataStructures{
 		node* left;
 		node* right;
 		int kids;
+        
+        
 		
 	public:
 		
@@ -154,10 +150,10 @@ namespace DataStructures{
 		}
 		
 		void update(){
-			int lheight = left ? left->height : 0;
-			int rheight = right ? right->height : 0;
+			int lheight = left ? (left->height +1) : 0;
+			int rheight = right ? (right->height + 1) : 0;
 			height = lheight > rheight ? lheight : rheight;
-			height++;
+//            height++;
 			BF = lheight - rheight;
             //if(parent) parent->update();
 		}
@@ -178,6 +174,7 @@ namespace DataStructures{
 		node<lecture>* copyNodes(node<lecture>* head, node<lecture>* parent);
 		node<lecture>* getData_aux(const lecture& key, node<lecture>* node);
 		void swapNodes(node<lecture>* a, node<lecture>* b);
+        int findMaxStudentsAux(int numLect, int collected, int studentSum, node<lecture>* curr);
 		
 	public:
 		modifiedAVLTree(): root(nullptr), nodeCount(0){}
@@ -221,6 +218,7 @@ namespace DataStructures{
 			if(n->getBF() < -1 || n->getBF() > 1) return false;
 			else return isBalanced_aux(n->getLeft()) && isBalanced_aux(n->getRight());
 		}
+        int findMaxStudents(int numLect);
 	};
 	
 	
@@ -333,12 +331,12 @@ namespace DataStructures{
 		}
 		else if(n->getRight()){
             n->setLecturesOnTheRight((n->getLecturesOnTheRight() + 1));
-            n->setStudentsOnTheRight((n->getLecturesOnTheRight() + in->getData()));
+            n->setStudentsOnTheRight((n->getStudentsOnTheRight() + in->getData()));
 			modifiedAVLTree::insert_aux(n->getRight(), in);
 		}
 		else {
             n->setLecturesOnTheRight((n->getLecturesOnTheRight() + 1));
-            n->setStudentsOnTheRight((n->getLecturesOnTheRight() + in->getData()));
+            n->setStudentsOnTheRight((n->getStudentsOnTheRight() + in->getData()));
 			n->setRight(in);
 			in->setParent(n);
 			n->update();
@@ -476,68 +474,20 @@ namespace DataStructures{
 		n->update();
 		pivot->update();
 	}
+	
+    int modifiedAVLTree::findMaxStudentsAux(int numLect, int collected, int studentSum, node<lecture>* curr){
+        if(numLect == collected) return studentSum;
+        if(curr->getLecturesOnTheRight() > numLect - collected) return findMaxStudentsAux(numLect, collected, studentSum, curr->getRight());
+        if(curr->getLecturesOnTheRight() == numLect - collected) return studentSum + curr->getStudentsOnTheRight();
+        if(!curr->getLeft() && collected <= numLect) return studentSum + curr->getData();
+        if(curr->getLecturesOnTheRight() < numLect - collected) return findMaxStudentsAux(numLect, collected + curr->getLecturesOnTheRight() + 1, studentSum + curr->getStudentsOnTheRight() + curr->getData(), curr->getLeft());
+        return studentSum;
+    }
+	
+    int modifiedAVLTree::findMaxStudents(int numLect){
+        return findMaxStudentsAux(numLect, 0, 0,this->getRoot());
+    }
     
-    
-//    modifiedAVLTree * combine(modifiedAVLTree * first,modifiedAVLTree * second){
-//
-//    }
-	
-	
-	/////////////////////////PRINTING FUNCTION AND AUX//////////////////////////////
-	struct Trunk
-	{
-		Trunk *prev;
-		std::string str;
-		
-		Trunk(Trunk *prev, std::string str)
-		{
-			this->prev = prev;
-			this->str = str;
-		}
-	};
-	
-	void showTrunks(Trunk *p) {
-		if (p == nullptr)
-			return;
-		
-		showTrunks(p->prev);
-		
-		std::cout << p->str;
-	}
-	
-	template<class K>
-	void printTree(node<K>* root, Trunk *prev, bool isLeft){
-		if (root == nullptr)
-			return;
-		
-		std::string prev_str = "	";
-		Trunk *trunk = new Trunk(prev, prev_str);
-		
-		printTree(root->getLeft(), trunk, true);
-		
-		if (!prev)
-			trunk->str = "---";
-		else if (isLeft)
-		{
-			trunk->str = ".---";
-			prev_str = "   |";
-		}
-		else
-		{
-			trunk->str = "`---";
-			prev->str = prev_str;
-		}
-		
-		showTrunks(trunk);
-		std::cout << root->getData() << std::endl;
-		
-		if (prev)
-			prev->str = prev_str;
-		trunk->str = "   |";
-		
-		printTree(root->getRight(), trunk, false);
-	}
-	////////////////////////////////////////////////////////////////////////////////
 	
 }
 
