@@ -84,7 +84,7 @@ namespace DataStructures{
                 return nullptr;
             }else{return nullptr;}
         }
-        void insert(int key, D& data){
+        void insert(int key, D* data){
             if(size == items) shrinkOrExpand(1);
             int place = (key % size);
             dataNode<int, D>* new_n = new (std::nothrow) dataNode<int, D>(key, data);
