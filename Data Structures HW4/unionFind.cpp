@@ -12,6 +12,8 @@
 #include <string.h>
 #include <iostream>
 #include "hash_table.hpp"
+#include "modifiedAVL.hpp"
+
 
 
 using namespace DataStructures;
@@ -40,5 +42,6 @@ int main(){
 	for(int i = 1; i <= (100000 - 3); i ++){
 		a.find(i);
 	}
+	cout<< "test done";
 	delete[] arr;
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		520B69A822B5653600CC94D3 /* unionFind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962E22B00691003159F2 /* unionFind.cpp */; };
+		520B69AF22B6ABA100CC94D3 /* avltest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 520B69AE22B6ABA100CC94D3 /* avltest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,7 +26,9 @@
 		520B69A922B5683D00CC94D3 /* hash_table.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash_table.hpp; sourceTree = "<group>"; };
 		520B69AA22B56B5500CC94D3 /* Exceptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Exceptions.hpp; sourceTree = "<group>"; };
 		520B69AB22B56B5500CC94D3 /* DataNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataNode.hpp; sourceTree = "<group>"; };
-		524A962B22B004AC003159F2 /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
+		520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modifiedAVL.hpp; sourceTree = "<group>"; };
+		520B69AD22B6AB2000CC94D3 /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
+		520B69AE22B6ABA100CC94D3 /* avltest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = avltest.cpp; sourceTree = "<group>"; };
 		524A962C22B004DC003159F2 /* library2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = library2.cpp; sourceTree = "<group>"; };
 		524A962E22B00691003159F2 /* unionFind.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = unionFind.cpp; sourceTree = "<group>"; };
 		524A962F22B00691003159F2 /* unionFind.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = unionFind.hpp; sourceTree = "<group>"; };
@@ -81,7 +83,9 @@
 				520B69AA22B56B5500CC94D3 /* Exceptions.hpp */,
 				524A962E22B00691003159F2 /* unionFind.cpp */,
 				524A962F22B00691003159F2 /* unionFind.hpp */,
-				524A962B22B004AC003159F2 /* AVL.hpp */,
+				520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */,
+				520B69AD22B6AB2000CC94D3 /* AVL.hpp */,
+				520B69AE22B6ABA100CC94D3 /* avltest.cpp */,
 			);
 			path = "Data Structures HW4";
 			sourceTree = "<group>";
@@ -142,7 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				520B69A822B5653600CC94D3 /* unionFind.cpp in Sources */,
+				520B69AF22B6ABA100CC94D3 /* avltest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
