@@ -81,7 +81,7 @@ namespace DataStructures{
 		UFinfo(int grSize): groupSize(grSize){}
 	};
 
-	template<class K,class T>
+	template<class T>
 	class unionFind{
 		UFNode<T>** arr;
 		int size;
