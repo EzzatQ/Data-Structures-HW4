@@ -38,7 +38,7 @@ namespace DataStructures{
                     dataNode<int, D> * curr = old_array[i];
                     while(curr){
                         try{
-                            insert(curr->getKey(), curr->getData());
+                            insert(curr->getKey(), &(curr->getData()));
                         }catch(OutOfMemory a){
                             emptyAnArray(old_array, old_size);
                             delete [] old_array;
@@ -73,12 +73,12 @@ namespace DataStructures{
             items = 0;
 
         }
-        dataNode<int, D> * find(int key){
+        D find(int key){
             int place = (key % size);
             if(array[place]){
                 dataNode<int, D>* ptr = array[place];
                 while(ptr){
-                    if(ptr->getKey() == key) return ptr;
+                    if(ptr->getKey() == key) return ptr->getData();
                     else ptr = ptr->getNext();
                 }
                 return nullptr;

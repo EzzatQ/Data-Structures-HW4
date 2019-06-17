@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		520B69AF22B6ABA100CC94D3 /* avltest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 520B69AE22B6ABA100CC94D3 /* avltest.cpp */; };
+		52C7DDA922B7FFAA003C6D6C /* library2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962C22B004DC003159F2 /* library2.cpp */; };
+		52C7DDAE22B81D8D003C6D6C /* AVL.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C7DDAB22B8178B003C6D6C /* AVL.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,18 +28,19 @@
 		520B69AA22B56B5500CC94D3 /* Exceptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Exceptions.hpp; sourceTree = "<group>"; };
 		520B69AB22B56B5500CC94D3 /* DataNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataNode.hpp; sourceTree = "<group>"; };
 		520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modifiedAVL.hpp; sourceTree = "<group>"; };
-		520B69AD22B6AB2000CC94D3 /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
-		520B69AE22B6ABA100CC94D3 /* avltest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = avltest.cpp; sourceTree = "<group>"; };
+		520B69B022B6C3AD00CC94D3 /* modSched.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modSched.hpp; sourceTree = "<group>"; };
 		524A962C22B004DC003159F2 /* library2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = library2.cpp; sourceTree = "<group>"; };
 		524A962E22B00691003159F2 /* unionFind.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = unionFind.cpp; sourceTree = "<group>"; };
 		524A962F22B00691003159F2 /* unionFind.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = unionFind.hpp; sourceTree = "<group>"; };
-		524A963122B00FB9003159F2 /* DynamicArray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicArray.cpp; sourceTree = "<group>"; };
-		524A963222B00FB9003159F2 /* DynamicArray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DynamicArray.hpp; sourceTree = "<group>"; };
 		528A65DF22A67336008BC0FF /* Data Structures HW4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Data Structures HW4"; sourceTree = BUILT_PRODUCTS_DIR; };
 		528A65E922A67531008BC0FF /* in2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = in2.txt; sourceTree = "<group>"; };
 		528A65EA22A67532008BC0FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		528A65EB22A67532008BC0FF /* library2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = library2.h; sourceTree = "<group>"; };
 		528A65EC22A67532008BC0FF /* out2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = out2.txt; sourceTree = "<group>"; };
+		52C7DDAA22B81208003C6D6C /* lectureInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lectureInfo.hpp; sourceTree = "<group>"; };
+		52C7DDAB22B8178B003C6D6C /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
+		52C7DDAC22B817B4003C6D6C /* Course.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Course.hpp; sourceTree = "<group>"; };
+		52C7DDAD22B817C4003C6D6C /* Lecture_Info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Lecture_Info.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,16 +78,17 @@
 				528A65EA22A67532008BC0FF /* main.cpp */,
 				524A962C22B004DC003159F2 /* library2.cpp */,
 				528A65EB22A67532008BC0FF /* library2.h */,
-				524A963122B00FB9003159F2 /* DynamicArray.cpp */,
-				524A963222B00FB9003159F2 /* DynamicArray.hpp */,
-				520B69A922B5683D00CC94D3 /* hash_table.hpp */,
+				520B69B022B6C3AD00CC94D3 /* modSched.hpp */,
 				520B69AB22B56B5500CC94D3 /* DataNode.hpp */,
+				520B69A922B5683D00CC94D3 /* hash_table.hpp */,
 				520B69AA22B56B5500CC94D3 /* Exceptions.hpp */,
 				524A962E22B00691003159F2 /* unionFind.cpp */,
 				524A962F22B00691003159F2 /* unionFind.hpp */,
+				52C7DDAA22B81208003C6D6C /* lectureInfo.hpp */,
 				520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */,
-				520B69AD22B6AB2000CC94D3 /* AVL.hpp */,
-				520B69AE22B6ABA100CC94D3 /* avltest.cpp */,
+				52C7DDAD22B817C4003C6D6C /* Lecture_Info.hpp */,
+				52C7DDAC22B817B4003C6D6C /* Course.hpp */,
+				52C7DDAB22B8178B003C6D6C /* AVL.hpp */,
 			);
 			path = "Data Structures HW4";
 			sourceTree = "<group>";
@@ -146,7 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				520B69AF22B6ABA100CC94D3 /* avltest.cpp in Sources */,
+				52C7DDAE22B81D8D003C6D6C /* AVL.hpp in Sources */,
+				52C7DDA922B7FFAA003C6D6C /* library2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

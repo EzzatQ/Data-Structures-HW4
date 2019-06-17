@@ -7,3 +7,11 @@
 //
 
 #include <stdio.h>
+#include "modSched.hpp"
+#include "Course.hpp"
+#include "AVL.hpp"
+
+
+int main(){
+	
+}

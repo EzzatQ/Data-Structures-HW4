@@ -15,6 +15,8 @@
 #include <stdbool.h>
 #include "Exceptions.hpp"
 #include "lectureInfo.hpp"
+
+
 namespace DataStructures{
 	
 	template < class K >
@@ -154,12 +156,10 @@ namespace DataStructures{
 		}
 		
 		void update(){
-			int lheight = left ? left->height : 0;
-			int rheight = right ? right->height : 0;
+			int lheight = left ? (left->height + 1) : 0;
+			int rheight = right ? (right->height + 1) : 0;
 			height = lheight > rheight ? lheight : rheight;
-			height++;
 			BF = lheight - rheight;
-            //if(parent) parent->update();
 		}
 		
 	};
@@ -189,13 +189,6 @@ namespace DataStructures{
             root = copyNodes(avl.root, nullptr);
             nodeCount = avl.nodeCount;
         }
-		
-        // this is not working :/
-//        modifiedAVLTree& operator=(const modifiedAVLTree& avl){
-//            if((*this) == avl) return this;
-//            this(avl);
-//            return this;
-//        }
         
 		node<lecture>* getRoot(){ return root;}
 		
