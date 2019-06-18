@@ -19,15 +19,16 @@ namespace DataStructures{
 		int courseID;
 		int StudentNum;
 		int LectureNum;
-		AVLTree<LectureInfo, int>* lectures;
+		AVLTree<LectureInfo, int>* lectures; //the 2nd int is the groupID;
 		modifiedAVLTree* students;
 		
 	public:
-        course() :courseID(0), lectures(nullptr){}
-		course(int number): StudentNum(0), LectureNum(0), courseID(number), lectures(nullptr){
-			lectures = new (std::nothrow) AVLTree<LectureInfo, int>();
-			if(!lectures) throw OutOfMemory();
-			try{ students = new modifiedAVLTree();} catch (std::bad_alloc e){throw OutOfMemory();}
+        course() : StudentNum(0), LectureNum(0), courseID(0), lectures(nullptr), students(nullptr){}
+		course(int number): StudentNum(0), LectureNum(0), courseID(number), lectures(nullptr), students(nullptr){
+			try{
+			lectures = new AVLTree<LectureInfo, int>();
+			students = new modifiedAVLTree();
+			} catch (std::bad_alloc e){throw OutOfMemory();}
 		}
         course(course& newCourse){
             this->courseID = newCourse.courseID;
@@ -40,7 +41,6 @@ namespace DataStructures{
 		}
 			
 		course& operator=(course& newCourse){
-			if(courseID == newCourse.courseID) return *this;
 			if(lectures) delete lectures;
 			if(students) delete students;
 			this->courseID = newCourse.courseID;
@@ -53,24 +53,35 @@ namespace DataStructures{
 			return *this;
         }
 		
-        void addLecture(int groupID, int roomID, int hour, int numStudents){///////////
-            lectures->insert(LectureInfo(hour,roomID),courseID);
-			students->insert(lecture(courseID, groupID, roomID, hour, numStudents), <#int data#>);
-			StudentNum += numStudents;
+        void addLecture(const lecture& lect){
+			try{
+				lectures->insert(LectureInfo(lect.getGroup(), lect.getHour()),courseID);
+				students->insert(lect, lect.getNumStudents());
+			} catch(AlreadyExists e) {throw Failure();}
+			StudentNum += lect.getNumStudents();
 			LectureNum++;
-			
         }
 		
-		void removeLecture(int hour, int room){////////
-            // should check if it throws and exception
-            lectures->remove(LectureInfo(hour,room));
+		void removeLecture(const lecture& lect){
+			if(students->remove(lect) == 0) throw Failure();
+			lectures->remove(LectureInfo(lect.getGroup(), lect.getHour()));
+			StudentNum -= lect.getNumStudents();
+			LectureNum--;
+			
         }
 		
 		void mergeCourses(course& other);///////////
 		
-		int competition(course& other);/////////////
+		int competition(course& other, int numGroups){
+			int thisMax = students->findMaxStudents(numGroups);
+			int otherMax = other.students->findMaxStudents(numGroups);
+			if(thisMax < otherMax) return other.courseID;
+			else return this->courseID;
+		}
 		
-		int getAverageStudents() const;/////////////
+		float getAverageStudents() const{
+			return static_cast<float>(StudentNum)/static_cast<float>(LectureNum);
+		}
 		
 		int getCourseID()const{ return courseID; }
 		

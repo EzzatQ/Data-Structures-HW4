@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-#include "DynamicArray.hpp"
 #include "Exceptions.hpp"
 
 

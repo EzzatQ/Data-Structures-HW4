@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "DataNode.hpp"
 #include "Exceptions.hpp"
+
 namespace DataStructures{
     template <class D>
     class hashTable{
@@ -63,6 +64,19 @@ namespace DataStructures{
                 }
             }
         }
+		
+		dataNode<int, D>* find_aux(int key){
+			int place = (key % size);
+			if(array[place]){
+				dataNode<int, D>* ptr = array[place];
+				while(ptr){
+					if(ptr->getKey() == key) return ptr;
+					else ptr = ptr->getNext();
+				}
+				return nullptr;
+			}else{return nullptr;}
+		}
+		
     public:
         hashTable(int n = 10): size(n){
             array = new (std::nothrow) dataNode<int, D>*[n];
@@ -73,24 +87,27 @@ namespace DataStructures{
             items = 0;
 
         }
+		
         D find(int key){
-            int place = (key % size);
-            if(array[place]){
-                dataNode<int, D>* ptr = array[place];
-                while(ptr){
-                    if(ptr->getKey() == key) return ptr->getData();
-                    else ptr = ptr->getNext();
-                }
-                return nullptr;
-            }else{return nullptr;}
+			D* res = find_aux(key)->getDataPtr();
+			if(!res) throw DoesNotExist();
+			return *res;
         }
+		
+		void setData(int key, D& data){
+			dataNode<int, D>* res = find_aux(key);
+			if(!res) throw DoesNotExist();
+			res->setData(data);
+		}
+		
         void insert(int key, D* data){
+			if(find(key)) throw AlreadyExists();
             if(size == items) shrinkOrExpand(1);
             int place = (key % size);
             dataNode<int, D>* new_n = new (std::nothrow) dataNode<int, D>(key, data);
             if(!new_n) throw OutOfMemory();
-                new_n->setNext(array[place]);
-                array[place] = new_n;
+			new_n->setNext(array[place]);
+			array[place] = new_n;
             items++;
         }
         void remove(int key){
@@ -116,7 +133,7 @@ namespace DataStructures{
             }
             
         }
-
+		
         ~hashTable(){
             
             delete [] array;

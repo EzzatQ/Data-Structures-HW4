@@ -16,7 +16,8 @@
 
 
 namespace DataStructures{
-    template< class K, class D>
+	
+	template< class K, class D>
     class dataNode{
         K* key;
         D* data;
@@ -68,7 +69,7 @@ namespace DataStructures{
         void setData(D& dat){
             if(data) delete data;
             try{
-                this->data = new D(data);
+                this->data = new D(dat);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         void setNext(dataNode* n){next = n;}

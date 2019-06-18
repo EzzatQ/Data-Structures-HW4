@@ -13,32 +13,31 @@
 namespace DataStructures{
 	class LectureInfo{
 	public:
-		int hour;
-		int room;
 		int group;
-		LectureInfo(int hour, int room, int group):group(group), hour(hour), room(room){}
+		int hour;
+		LectureInfo(int group, int hour):group(group), hour(hour){}
+		
 		~LectureInfo(){}
+		
 		LectureInfo(const LectureInfo& li){
 			hour = li.hour;
-			room = li.room;
 			group = li.group;
 		}
 		LectureInfo& operator=(LectureInfo& li){
 			hour = li.hour;
-			room = li.room;
 			group = li.group;
 			return *this;
 		}
-        int getHour(){return hour;}
-        int getRoom(){return room;}
+		int getGroup() const {return group;}
+        int getHour() const {return hour;}
+	
 		bool operator==(const LectureInfo& li) const {
-			return group == li.group && hour == li.hour && room == li.room;
+			return group == li.group && hour == li.hour;
 		}
 		bool operator>(const LectureInfo& li) const {
 			if(group > li.group) return true;
 			else if(group == li.group && hour > li.hour) return true;
 			else if(group == li.group && hour == li.hour && hour > li.hour) return true;
-			else if(group == li.group && hour == li.hour && hour == li.hour && room > li.room) return true;
 			else return false;
 		}
 		bool operator<(const LectureInfo& li) const {

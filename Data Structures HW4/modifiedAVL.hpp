@@ -178,7 +178,7 @@ namespace DataStructures{
 		modifiedNode<lecture>* copyNodes(modifiedNode<lecture>* head, modifiedNode<lecture>* parent);
 		modifiedNode<lecture>* getData_aux(const lecture& key, modifiedNode<lecture>* node);
 		void swapNodes(modifiedNode<lecture>* a, modifiedNode<lecture>* b);
-
+		int findMaxStudentsAux(int numLect, int collected, int studentSum, modifiedNode<lecture>* curr);
 	public:
 		modifiedAVLTree(): root(nullptr), nodeCount(0){}
         modifiedAVLTree(modifiedNode<lecture>* newRoot, int nodeCount):root(nullptr), nodeCount(nodeCount){
@@ -203,7 +203,7 @@ namespace DataStructures{
 		bool contains(const lecture& key);
         void fillAnArray(modifiedNode<lecture>** array);
 		void insert(const lecture& key, int data);
-		void remove(const lecture& key);
+		int remove(const lecture& key);
 
 		void rotateLeft(modifiedNode<lecture>* node);
 		void rotateRight(modifiedNode<lecture>* node);
@@ -214,6 +214,8 @@ namespace DataStructures{
 			if(n->getBF() < -1 || n->getBF() > 1) return false;
 			else return isBalanced_aux(n->getLeft()) && isBalanced_aux(n->getRight());
 		}
+		
+		int findMaxStudents(int numLect);
 	};
 
 
@@ -343,8 +345,8 @@ namespace DataStructures{
 
 	//Removes node  of given key while maintaining balance of the tree
 
-	void modifiedAVLTree::remove(const lecture& key){
-		remove_aux(key, root);
+	int modifiedAVLTree::remove(const lecture& key){
+		return remove_aux(key, root);
 	}
 
 
@@ -470,8 +472,18 @@ namespace DataStructures{
 		pivot->update();
 	}
 
-
-
+	int modifiedAVLTree::findMaxStudentsAux(int numLect, int collected, int studentSum, modifiedNode<lecture>* curr){
+		if(numLect == collected) return studentSum;
+		if(curr->getLecturesOnTheRight() > numLect - collected) return findMaxStudentsAux(numLect, collected, studentSum, curr->getRight());
+		if(curr->getLecturesOnTheRight() == numLect - collected) return studentSum + curr->getStudentsOnTheRight();
+		if(!curr->getLeft() && collected <= numLect) return studentSum + curr->getData();
+		if(curr->getLecturesOnTheRight() < numLect - collected) return findMaxStudentsAux(numLect, collected + curr->getLecturesOnTheRight() + 1, studentSum + curr->getStudentsOnTheRight() + curr->getData(), curr->getLeft());
+		return studentSum;
+	}
+	
+	int modifiedAVLTree::findMaxStudents(int numLect){
+		return findMaxStudentsAux(numLect, 0, 0,this->getRoot());
+	}
 
 }
 

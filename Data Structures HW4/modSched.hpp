@@ -11,17 +11,16 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "modifiedAVL.hpp"
 #include "hash_table.hpp"
 #include "unionFind.hpp"
 #include "Course.hpp"
+#include "Exceptions.hpp"
 
 namespace DataStructures {
     class modSchedule{
-		
+		int courseNum;
         unionFind<course>* courses;
         hashTable<lecture*>** schedule;// hour and then room
-		int courseNum;
 		
     public:
 		
@@ -31,15 +30,17 @@ namespace DataStructures {
 				for (int j = 0; j < 10; j++) {
 					schedule[j] = new hashTable<lecture*>;
 				}
-				
-				course* arr = new modifiedAVLTree[n];
-				for (int i = 0; i < n; i++) {
-					arr[i] = modifiedAVLTree();
+				course* arr = new course[n];
+				for (int i = 1; i <= n; i++) {
+					course* temp = new course(i);
+					arr[i-1] = *temp;
+					delete temp;
 				}
 				courses = new unionFind<course>(n,arr);
 				delete [] arr;
 			} catch(std::bad_alloc e){ throw OutOfMemory();}
         }
+		
         ~modSchedule(){
             for (int i = 0; i < 10; i++) {
                 delete schedule[i];
@@ -47,11 +48,15 @@ namespace DataStructures {
             delete schedule;
             delete courses;
         }
+		
         void addRoom(int roomId){
             if(roomId <= 0) throw InvalidInput();
-            for (int i = 0; i < 10; i++) {
-                schedule[i]->insert(roomId, nullptr);
-            }
+			try{
+				for (int i = 0; i < 10; i++) {
+					schedule[i]->insert(roomId, nullptr);
+				}
+			} catch(AlreadyExists e){ throw Failure();}
+			
         }
         void deleteRoom(int roomId){
             if(roomId <= 0) throw InvalidInput();
@@ -66,15 +71,41 @@ namespace DataStructures {
                 schedule[i]->remove(roomId);
             }
         }
+		
         void addLecture(int courseId, int groupId, int roomId, int hour, int numStudents){
 			if(groupId < 0 || courseId > courseNum || courseId < 1 || numStudents < 0 || roomId <= 0 || hour < 1 || hour > 10) throw InvalidInput();
-			
-			lecture* booking = schedule[hour]->find(roomId);
-			if(booking) throw Failure();
+			lecture* booked = schedule[hour - 1]->find(roomId);
+			if(booked) throw Failure();
 			lecture* newLect = new lecture(courseId, groupId, roomId, hour, numStudents);
-            modifiedAVLTree* courseTree = courses->getData(courses->find(courseId));
-			if(courseTree->contains(*newLect)) 
+			schedule[hour - 1]->setData(roomId, newLect);
+			course* CRS = courses->getData(courses->find(courseId));
+			CRS->addLecture(*newLect);
         }
+		
+		void deleteLecture(int hour, int roomId){
+			if(roomId <= 0 || hour < 1 || hour > 10) throw InvalidInput();
+			lecture* booked = schedule[hour - 1]->find(roomId);
+			if(!booked) throw Failure();
+			course* CRS = courses->getData(courses->find(booked->getCourse()));
+			CRS->removeLecture(*booked);
+		}
+		
+		void mergeCourses(int course1, int course2){}
+		
+		int competition(int courseID1, int courseID2, int numGroups) const {
+			if(numGroups <= 0 || courseID1 < 1 || courseID1 > courseNum ||courseID1 < 1 || courseID1 > courseNum) throw InvalidInput();
+			course* C1 = courses->getData(courseID1);
+			course* C2 = courses->getData(courseID2);
+			return C1->competition(*C2, numGroups);
+		}
+		
+		float getAverageStudent(int hour, int roomId) const {
+			if(roomId<= 0 || hour < 1 || hour > 10) throw InvalidInput();
+			lecture* booked = schedule[hour - 1]->find(roomId);
+			if(!booked) throw Failure();
+			course* C = courses->getData(courses->find(booked->getCourse()));
+			return C->getAverageStudents();
+		}
     };
 }
 #endif /* modSched_hpp */

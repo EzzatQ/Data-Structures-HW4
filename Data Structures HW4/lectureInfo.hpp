@@ -10,6 +10,7 @@
 #define lectureInfo_hpp
 
 #include <stdio.h>
+
 namespace DataStructures{
     class lecture{
         int courseId;
@@ -37,6 +38,13 @@ namespace DataStructures{
             numStudents = li.numStudents;
             return *this;
         }
+		
+		int getCourse() const {return courseId;}
+		int getGroup() const {return groupId;}
+		int getRoom() const {return roomId;}
+		int getHour() const {return hour;}
+		int getNumStudents() const {return numStudents;}
+		
         bool operator==(const lecture& li) const {
             return (groupId == li.groupId && roomId == li.roomId && hour == li.hour && numStudents == li.numStudents);
         }
