@@ -16,7 +16,7 @@
 #include "Exceptions.hpp"
 
 namespace DataStructures{
-	
+
 	template < class K, class D>
 	class node{
 		K* key;
@@ -33,16 +33,16 @@ namespace DataStructures{
         void setHeight(int newh){if(newh > 0) height = newh;}
 		node(const K& key, D& data): key(nullptr), data(nullptr), parent(nullptr), left(nullptr), right(nullptr), kids(0), BF(0), height(0){
 			try{
-				this->key = new K(key);
-				this->data = new D(data);
+				this->key = new (std::nothrow) K(key);
+				this->data = new (std::nothrow) D(data);
 			} catch (std::bad_alloc e){ throw OutOfMemory();}
 		}
 		
 
         node(node& n){
             try{
-                this->key = new K(*n.key);
-                this->data = new D(*n.data);
+                this->key = new (std::nothrow) K(*n.key);
+                this->data = new (std::nothrow) D(*n.data);
             } catch (std::bad_alloc e){ throw OutOfMemory();}
             this->parent = n.parent;
             this->left = n.left;
@@ -156,20 +156,18 @@ namespace DataStructures{
 			this->parent = nullptr;
 		}
 		
-		void update(){
-			int lheight = left ? left->height : 0;
-			int rheight = right ? right->height : 0;
-			height = lheight > rheight ? lheight : rheight;
-			height++;
-			BF = lheight - rheight;
-            //if(parent) parent->update();
-		}
+        void update(){
+            int lheight = left ? (left->height + 1) : 0;
+            int rheight = right ? (right->height + 1) : 0;
+            height = lheight > rheight ? lheight : rheight;
+            BF = lheight - rheight;
+        }
 		
 	};
 	
 	//Assuming class K has comparing operators
 	template< class K, class D>
-	class AVLTree {
+	class AVLTree{
 		node<K, D>* root;
 		int nodeCount;
 		
@@ -461,12 +459,7 @@ namespace DataStructures{
 		pivot->update();
 	}
     
-    template<class K, class D>
-    AVLTree<K, D> * combine(AVLTree<K, D> * first,AVLTree<K, D> * second){
-        
-    }
-	
-	
+
 	/////////////////////////PRINTING FUNCTION AND AUX//////////////////////////////
 	struct Trunk
 	{
@@ -522,7 +515,6 @@ namespace DataStructures{
 		printTree(root->getRight(), trunk, false);
 	}
 	////////////////////////////////////////////////////////////////////////////////
-	
 }
 
 #endif /* AVL_hpp */

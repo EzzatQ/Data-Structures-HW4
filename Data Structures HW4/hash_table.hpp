@@ -18,8 +18,6 @@ namespace DataStructures{
         dataNode<int, D> **array;
         int size;
         int items;
-        
-
 
         void shrinkOrExpand(int t){
             dataNode<int, D> ** old_array = array;
@@ -40,7 +38,7 @@ namespace DataStructures{
                     dataNode<int, D> * curr = old_array[i];
                     while(curr){
                         try{
-                            insert(curr->getKey(), curr->getData());
+                            insert(curr->getKey(), &(curr->getData()));
                         }catch(OutOfMemory a){
                             emptyAnArray(old_array, old_size);
                             delete [] old_array;
@@ -75,18 +73,18 @@ namespace DataStructures{
             items = 0;
 
         }
-        dataNode<int, D> * find(int key){
+        D find(int key){
             int place = (key % size);
             if(array[place]){
                 dataNode<int, D>* ptr = array[place];
                 while(ptr){
-                    if(ptr->getKey() == key) return ptr;
+                    if(ptr->getKey() == key) return ptr->getData();
                     else ptr = ptr->getNext();
                 }
                 return nullptr;
             }else{return nullptr;}
         }
-        void insert(int key, D& data){
+        void insert(int key, D* data){
             if(size == items) shrinkOrExpand(1);
             int place = (key % size);
             dataNode<int, D>* new_n = new (std::nothrow) dataNode<int, D>(key, data);
@@ -100,12 +98,12 @@ namespace DataStructures{
             int place = (key % size);
             if(array[place]){
                 if(array[place]->getKey() == key){
-                    dataNode<int, D>* tmp = array[place]->getNext;
+					dataNode<int, D>* tmp = array[place]->getNext();
                     delete array[place];
                     items--;
                     array[place] = tmp;
                 }else{
-                    for (dataNode<int, D>* prev = array[place] , curr; prev; prev = prev->getNext()) {
+                    for (dataNode<int, D>* prev = array[place] ,* curr = prev; prev; prev = prev->getNext()) {
                         curr = prev->getNext();
                         if(curr->getKey() == key){
                             prev->setNext(curr->getNext());

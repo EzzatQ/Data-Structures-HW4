@@ -42,6 +42,12 @@ namespace DataStructures{
         }
     };
     
+    class InvalidInput: public DSException {
+    public:
+        std::string what(){
+            return "DSError: invalid input";
+        }
+    };
     class Failure : public DSException {
     public:
         std::string what(){

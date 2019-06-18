@@ -12,21 +12,36 @@
 #include <string.h>
 #include <iostream>
 #include "hash_table.hpp"
+#include "modifiedAVL.hpp"
+
 
 
 using namespace DataStructures;
-int main(){
-//	hashTable<unionFind<int, int>> hash = hashTable<unionFind<int, int>>(10);
-//	int arr[] = {1,2,3,4,5,6,7,8,9,10};
-//	unionFind<int,int> uf = unionFind<int,int>(10, arr);
-//	for(int i = 0; i < 20; i++){
-//		unionFind<int,int> temp(uf);
-//		hash.insert(i, uf);
-//	}
-	hashTable<int> hash = hashTable<int>(10);
-	for(int i = 0; i < 8; i++){
-		hash.insert(i, i);
+using namespace std;
+int main1(){
+	int* arr = new int[100000];
+	for(int i = 1; i <= 100000; i++){
+		arr[i - 1] = i;
 	}
-	hashTable<int> hash2(hash);
-	
+	unionFind<int> a = unionFind<int>(100000, arr);
+	for(int i = 1; i <= 100000; i += 2){
+		a.unite(i, i + 1);
+	}
+	for(int i = 1; i <= (100000 - 3) / 2; i += 4){
+		a.find(i);
+	}
+	for(int i = 1; i <= (100000 - 3) / 2; i += 4){
+		a.unite(i + 1, i + 3);
+	}
+	for(int i = 1; i <= (100000 - 3) / 2; i += 4){
+		a.find(i);
+	}
+	for(int i = 1; i <= (100000 - 3) ; i ++){
+		a.unite(i , i + 1);
+	}
+	for(int i = 1; i <= (100000 - 3); i ++){
+		a.find(i);
+	}
+	cout<< "test done";
+	delete[] arr;
 }
