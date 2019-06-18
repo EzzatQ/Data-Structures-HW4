@@ -181,6 +181,7 @@ namespace DataStructures{
 		int findMaxStudentsAux(int numLect, int collected, int studentSum, modifiedNode<lecture>* curr);
 	public:
 		modifiedAVLTree(): root(nullptr), nodeCount(0){}
+		
         modifiedAVLTree(modifiedNode<lecture>* newRoot, int nodeCount):root(nullptr), nodeCount(nodeCount){
             root = copyNodes(newRoot, nullptr);
         }

@@ -37,7 +37,6 @@ namespace DataStructures{
 		bool operator>(const LectureInfo& li) const {
 			if(group > li.group) return true;
 			else if(group == li.group && hour > li.hour) return true;
-			else if(group == li.group && hour == li.hour && hour > li.hour) return true;
 			else return false;
 		}
 		bool operator<(const LectureInfo& li) const {

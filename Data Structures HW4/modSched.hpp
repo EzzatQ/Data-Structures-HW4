@@ -90,14 +90,23 @@ namespace DataStructures {
 			if(!booked) throw Failure();
 			course* CRS = courses->getData(courses->find(booked->getCourse()));
 			CRS->removeLecture(*booked);
+			schedule[hour - 1]->setData(roomId, nullptr);
 		}
 		
-		void mergeCourses(int course1, int course2){}
+		void mergeCourses(int course1, int course2){
+			if(course1 < 1 || course1 > courseNum || course2 < 1 || course2 > courseNum) throw InvalidInput();
+			if(courses->find(course1) == courses->find(course2)) throw Failure();
+			course* C1 = courses->getData(courses->find(course1));
+			course* C2 = courses->getData(courses->find(course2));
+			if(courses->getSize(course1) < courses->getSize(course2)) C2->merge(*C1);
+			else C1->merge(*C2);
+			courses->unite(course1, course2);
+		}
 		
 		int competition(int courseID1, int courseID2, int numGroups) const {
 			if(numGroups <= 0 || courseID1 < 1 || courseID1 > courseNum ||courseID1 < 1 || courseID1 > courseNum) throw InvalidInput();
-			course* C1 = courses->getData(courseID1);
-			course* C2 = courses->getData(courseID2);
+			course* C1 = courses->getData(courses->find(courseID1));
+			course* C2 = courses->getData(courses->find(courseID2));
 			return C1->competition(*C2, numGroups);
 		}
 		
@@ -108,6 +117,7 @@ namespace DataStructures {
 			course* C = courses->getData(courses->find(booked->getCourse()));
 			return C->getAverageStudents();
 		}
+		
     };
 }
 #endif /* modSched_hpp */

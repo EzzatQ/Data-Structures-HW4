@@ -88,13 +88,18 @@ namespace DataStructures{
 
         }
 		
+		dataNode<int, D>* findNode(int key){
+			return find_aux(key);
+		}
+		
         D find(int key){
 			dataNode<int, D>* res = find_aux(key);
 			if(!res) throw DoesNotExist();
-			return res->getData();
+			if(res->getDataPtr()) return *(res->getDataPtr());
+			return D();
         }
 		
-		void setData(int key, D& data){
+		void setData(int key, D data){
 			dataNode<int, D>* res = find_aux(key);
 			if(!res) throw DoesNotExist();
 			res->setData(data);

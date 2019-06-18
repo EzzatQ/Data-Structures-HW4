@@ -20,7 +20,7 @@ namespace DataStructures{
         int numStudents;
     public:
         lecture(int courseId, int groupId, int roomId, int hour, int numStudents):courseId(courseId), groupId(groupId), roomId(roomId), hour(hour), numStudents(numStudents){
-            if(courseId < 0 || groupId < 0 || roomId < 0 || hour < 0 || numStudents <=0)
+            if(courseId < 0 || groupId < 0 || roomId <= 0 || hour < 0 || numStudents < 0)
                 throw IllegalInitialization();
         }
         lecture(const lecture& a){

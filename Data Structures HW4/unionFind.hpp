@@ -67,9 +67,11 @@ namespace DataStructures{
 		}
 
 		T* getData() const {return data;}
+		
 		void setData(T* dat){
-			T temp(*dat);
-			data = &temp;
+			if(data) delete data;
+			if(!dat) data = nullptr;
+			else data = new T(dat);
 		}
 
 	};
@@ -153,6 +155,11 @@ namespace DataStructures{
 
 		T* getData(int i){
 			return arr[i - 1]->getData();
+		}
+		
+		int getSize(int i){
+			int x = find(i);
+			return arr[x-1]->getSize();
 		}
 	};
 }

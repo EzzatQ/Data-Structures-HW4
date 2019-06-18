@@ -39,6 +39,7 @@ StatusType deleteRoom(void *DS, int roomID){
 		((modSchedule*)DS)->deleteRoom(roomID);
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
+	catch(DoesNotExist e){ return FAILURE;}
 	catch(Failure e){return FAILURE;}
 	return SUCCESS;
 }
@@ -50,6 +51,7 @@ StatusType addLecture(void *DS, int courseID, int groupID, int roomID, int hour,
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
 	catch(OutOfMemory e){return ALLOCATION_ERROR;}
+	catch(DoesNotExist e){ return FAILURE;}
 	catch(Failure e){return FAILURE;}
 	return SUCCESS;
 }
@@ -61,6 +63,7 @@ StatusType deleteLecture(void *DS, int hour, int roomID){
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
 	catch(Failure e){return FAILURE;}
+	catch(DoesNotExist e){ return FAILURE;}
 	return SUCCESS;
 }
 
@@ -71,6 +74,7 @@ StatusType mergeCourses(void *DS, int courseID1, int courseID2){
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
 	catch(OutOfMemory e){return ALLOCATION_ERROR;}
+	catch(DoesNotExist e){ return FAILURE;}
 	catch(Failure e){return FAILURE;}
 	return SUCCESS;
 }
@@ -82,6 +86,7 @@ StatusType competition(void *DS, int courseID1, int courseID2, int numGroups, in
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
 	catch(OutOfMemory e){return ALLOCATION_ERROR;}
+	catch(DoesNotExist e){ return FAILURE;}
 	catch(Failure e){return FAILURE;}
 	return SUCCESS;
 }
@@ -93,6 +98,7 @@ StatusType getAverageStudentsInCourse(void *DS, int hour, int roomID, float * av
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
 	catch(OutOfMemory e){return ALLOCATION_ERROR;}
+	catch(DoesNotExist e){ return FAILURE;}
 	catch(Failure e){return FAILURE;}
 	return SUCCESS;
 }
@@ -100,5 +106,6 @@ StatusType getAverageStudentsInCourse(void *DS, int hour, int roomID, float * av
 void Quit(void** DS){
 	if(*DS){
 		delete (modSchedule*)(*DS);
+		*DS = NULL;
 	}
 }
