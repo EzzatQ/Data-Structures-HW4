@@ -24,6 +24,7 @@ namespace DataStructures{
 		T* data;
 		UFNode* parent;
 		int unionSize;
+		
 
 	public:
 		UFNode(int k, T* dat = nullptr, UFNode* par = nullptr):key(k), data(nullptr), parent(par), unionSize(1){

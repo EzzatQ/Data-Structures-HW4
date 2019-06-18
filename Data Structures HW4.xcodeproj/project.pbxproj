@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5225C7A522B8CAE80010E80A /* unionFind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962E22B00691003159F2 /* unionFind.cpp */; };
 		52C7DDA922B7FFAA003C6D6C /* library2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962C22B004DC003159F2 /* library2.cpp */; };
-		52C7DDAE22B81D8D003C6D6C /* AVL.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C7DDAB22B8178B003C6D6C /* AVL.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +29,7 @@
 		520B69AB22B56B5500CC94D3 /* DataNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataNode.hpp; sourceTree = "<group>"; };
 		520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modifiedAVL.hpp; sourceTree = "<group>"; };
 		520B69B022B6C3AD00CC94D3 /* modSched.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modSched.hpp; sourceTree = "<group>"; };
+		5225C7A422B8CA4C0010E80A /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
 		524A962C22B004DC003159F2 /* library2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = library2.cpp; sourceTree = "<group>"; };
 		524A962E22B00691003159F2 /* unionFind.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = unionFind.cpp; sourceTree = "<group>"; };
 		524A962F22B00691003159F2 /* unionFind.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = unionFind.hpp; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		528A65EB22A67532008BC0FF /* library2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = library2.h; sourceTree = "<group>"; };
 		528A65EC22A67532008BC0FF /* out2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = out2.txt; sourceTree = "<group>"; };
 		52C7DDAA22B81208003C6D6C /* lectureInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lectureInfo.hpp; sourceTree = "<group>"; };
-		52C7DDAB22B8178B003C6D6C /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
 		52C7DDAC22B817B4003C6D6C /* Course.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Course.hpp; sourceTree = "<group>"; };
 		52C7DDAD22B817C4003C6D6C /* Lecture_Info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Lecture_Info.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,11 +54,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5225C7A222B8C9CC0010E80A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		528A65D622A67336008BC0FF = {
 			isa = PBXGroup;
 			children = (
 				528A65E122A67336008BC0FF /* Data Structures HW4 */,
 				528A65E022A67336008BC0FF /* Products */,
+				5225C7A222B8C9CC0010E80A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,8 +95,8 @@
 				52C7DDAA22B81208003C6D6C /* lectureInfo.hpp */,
 				520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */,
 				52C7DDAD22B817C4003C6D6C /* Lecture_Info.hpp */,
+				5225C7A422B8CA4C0010E80A /* AVL.hpp */,
 				52C7DDAC22B817B4003C6D6C /* Course.hpp */,
-				52C7DDAB22B8178B003C6D6C /* AVL.hpp */,
 			);
 			path = "Data Structures HW4";
 			sourceTree = "<group>";
@@ -149,7 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52C7DDAE22B81D8D003C6D6C /* AVL.hpp in Sources */,
+				5225C7A522B8CAE80010E80A /* unionFind.cpp in Sources */,
 				52C7DDA922B7FFAA003C6D6C /* library2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

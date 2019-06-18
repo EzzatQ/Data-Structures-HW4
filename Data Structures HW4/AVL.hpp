@@ -16,7 +16,7 @@
 #include "Exceptions.hpp"
 
 namespace DataStructures{
-	
+
 	template < class K, class D>
 	class node{
 		K* key;
@@ -167,7 +167,7 @@ namespace DataStructures{
 	
 	//Assuming class K has comparing operators
 	template< class K, class D>
-	class AVLTree {
+	class AVLTree{
 		node<K, D>* root;
 		int nodeCount;
 		
@@ -515,7 +515,6 @@ namespace DataStructures{
 		printTree(root->getRight(), trunk, false);
 	}
 	////////////////////////////////////////////////////////////////////////////////
-	
 }
 
 #endif /* AVL_hpp */

@@ -32,7 +32,7 @@ namespace DataStructures {
 					schedule[j] = new hashTable<lecture*>;
 				}
 				
-				course * arr = new modifiedAVLTree[n];
+				course* arr = new modifiedAVLTree[n];
 				for (int i = 0; i < n; i++) {
 					arr[i] = modifiedAVLTree();
 				}

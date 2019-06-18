@@ -18,12 +18,12 @@
 
 using namespace DataStructures;
 using namespace std;
-int main(){
+int main1(){
 	int* arr = new int[100000];
 	for(int i = 1; i <= 100000; i++){
 		arr[i - 1] = i;
 	}
-	unionFind<int, int> a = unionFind<int, int>(100000, arr);
+	unionFind<int> a = unionFind<int>(100000, arr);
 	for(int i = 1; i <= 100000; i += 2){
 		a.unite(i, i + 1);
 	}

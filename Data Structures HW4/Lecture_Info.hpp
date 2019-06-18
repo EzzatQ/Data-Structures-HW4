@@ -15,31 +15,34 @@ namespace DataStructures{
 	public:
 		int hour;
 		int room;
-		LectureInfo(int hour, int room): hour(hour), room(room){}
+		int group;
+		LectureInfo(int hour, int room, int group):group(group), hour(hour), room(room){}
 		~LectureInfo(){}
 		LectureInfo(const LectureInfo& li){
 			hour = li.hour;
 			room = li.room;
+			group = li.group;
 		}
 		LectureInfo& operator=(LectureInfo& li){
 			hour = li.hour;
 			room = li.room;
+			group = li.group;
 			return *this;
 		}
         int getHour(){return hour;}
         int getRoom(){return room;}
 		bool operator==(const LectureInfo& li) const {
-			return hour == li.hour && room == li.room;
+			return group == li.group && hour == li.hour && room == li.room;
 		}
 		bool operator>(const LectureInfo& li) const {
-			if(hour > li.hour) return true;
-			else if(hour < li.hour) return false;
-			else return room > li.room;
+			if(group > li.group) return true;
+			else if(group == li.group && hour > li.hour) return true;
+			else if(group == li.group && hour == li.hour && hour > li.hour) return true;
+			else if(group == li.group && hour == li.hour && hour == li.hour && room > li.room) return true;
+			else return false;
 		}
 		bool operator<(const LectureInfo& li) const {
-			if(hour < li.hour) return true;
-			else if(hour > li.hour) return false;
-			else return room < li.room;
+			return !(operator>(li) || operator==(li));
 		}
 		bool operator>=(const LectureInfo& li) const {
 			return operator>(li) || operator==(li);
