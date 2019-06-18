@@ -12,3 +12,4 @@ mergeCourses 1 2
 getAverageStudentsInCourse 2 5
 getAverageStudentsInCourse 1 5
 Quit
+

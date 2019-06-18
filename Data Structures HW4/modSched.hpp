@@ -76,10 +76,12 @@ namespace DataStructures {
 			if(groupId < 0 || courseId > courseNum || courseId < 1 || numStudents < 0 || roomId <= 0 || hour < 1 || hour > 10) throw InvalidInput();
 			lecture* booked = schedule[hour - 1]->find(roomId);
 			if(booked) throw Failure();
-			lecture* newLect = new lecture(courseId, groupId, roomId, hour, numStudents);
-			schedule[hour - 1]->setData(roomId, newLect);
-			course* CRS = courses->getData(courses->find(courseId));
-			CRS->addLecture(*newLect);
+			try{
+				lecture* newLect = new lecture(courseId, groupId, roomId, hour, numStudents);
+				schedule[hour - 1]->setData(roomId, newLect);
+				course* CRS = courses->getData(courses->find(courseId));
+				CRS->addLecture(*newLect);
+			} catch (std::bad_alloc e) {throw OutOfMemory();}
         }
 		
 		void deleteLecture(int hour, int roomId){

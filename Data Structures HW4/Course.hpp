@@ -41,6 +41,7 @@ namespace DataStructures{
 		}
 			
 		course& operator=(course& newCourse){
+			if(*this == newCourse) return *this;
 			if(lectures) delete lectures;
 			if(students) delete students;
 			this->courseID = newCourse.courseID;

@@ -97,6 +97,7 @@ int main(int argc, const char**argv) {
         if (parser(buffer) == error)
             break;
     };
+	cout<<"SUCCESS"<<endl;
     return 0;
 }
 
