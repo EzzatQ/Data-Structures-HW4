@@ -38,36 +38,20 @@ namespace DataStructures{
             return *this;
         }
         bool operator==(const lecture& li) const {
-<<<<<<< HEAD
-            return (courseId == li.courseId && groupId == li.groupId && roomId == li.roomId && hour == li.hour && numStudents == li.numStudents);
-=======
             return (groupId == li.groupId && roomId == li.roomId && hour == li.hour && numStudents == li.numStudents);
->>>>>>> 75753f2cf557e91294dbdc321f60551ef5b087e6
         }
         bool operator>(const lecture& li) const {
             if(numStudents > li.numStudents) return true;
             if(numStudents == li.numStudents && courseId > li.courseId) return true;
-<<<<<<< HEAD
-            if(numStudents == li.numStudents && courseId == li.courseId && groupId > li.groupId) return true;
-            if(numStudents == li.numStudents && courseId == li.courseId && groupId == li.groupId && roomId > li.roomId) return true;
-            if(numStudents == li.numStudents && courseId == li.courseId && groupId == li.groupId && roomId == li.roomId && hour > li.hour) return true;
-=======
             if(numStudents == li.numStudents && groupId == li.groupId && roomId > li.roomId) return true;
             if(numStudents == li.numStudents && groupId == li.groupId && roomId == li.roomId && hour > li.hour) return true;
->>>>>>> 75753f2cf557e91294dbdc321f60551ef5b087e6
             return false;
         }
         bool operator<(const lecture& li) const {
             if(numStudents < li.numStudents) return true;
             if(numStudents == li.numStudents && courseId < li.courseId) return true;
-<<<<<<< HEAD
-            if(numStudents == li.numStudents && courseId == li.courseId && groupId < li.groupId) return true;
-            if(numStudents == li.numStudents && courseId == li.courseId && groupId == li.groupId && roomId < li.roomId) return true;
-            if(numStudents == li.numStudents && courseId == li.courseId && groupId == li.groupId && roomId == li.roomId && hour < li.hour) return true;
-=======
             if(numStudents == li.numStudents && groupId == li.groupId && roomId < li.roomId) return true;
             if(numStudents == li.numStudents && groupId == li.groupId && roomId == li.roomId && hour < li.hour) return true;
->>>>>>> 75753f2cf557e91294dbdc321f60551ef5b087e6
             return false;
         }
         bool operator>=(const lecture& li) const {
