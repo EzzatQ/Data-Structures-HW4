@@ -89,9 +89,9 @@ namespace DataStructures{
         }
 		
         D find(int key){
-			D* res = find_aux(key)->getDataPtr();
+			dataNode<int, D>* res = find_aux(key);
 			if(!res) throw DoesNotExist();
-			return *res;
+			return res->getData();
         }
 		
 		void setData(int key, D& data){
@@ -101,7 +101,10 @@ namespace DataStructures{
 		}
 		
         void insert(int key, D* data){
-			if(find(key)) throw AlreadyExists();
+			try{
+				find(key);
+				throw AlreadyExists();
+			} catch (DoesNotExist e){
             if(size == items) shrinkOrExpand(1);
             int place = (key % size);
             dataNode<int, D>* new_n = new (std::nothrow) dataNode<int, D>(key, data);
@@ -109,6 +112,7 @@ namespace DataStructures{
 			new_n->setNext(array[place]);
 			array[place] = new_n;
             items++;
+			}
         }
         void remove(int key){
             if( size/4 >= items) shrinkOrExpand(0);
