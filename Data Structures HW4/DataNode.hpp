@@ -66,10 +66,10 @@ namespace DataStructures{
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         
-        void setData(D& dat){
+        void setData(D* dat){
             if(data) delete data;
             try{
-                this->data = new D(dat);
+                this->data = data;
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         void setNext(dataNode* n){next = n;}

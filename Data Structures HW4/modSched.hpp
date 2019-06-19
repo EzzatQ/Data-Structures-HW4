@@ -78,10 +78,15 @@ namespace DataStructures {
 			if(booked) throw Failure();
 			try{
 				lecture* newLect = new lecture(courseId, groupId, roomId, hour, numStudents);
-				schedule[hour - 1]->setData(roomId, newLect);
+                try{
 				course* CRS = courses->getData(courses->find(courseId));
 				CRS->addLecture(*newLect);
-			} catch (std::bad_alloc e) {throw OutOfMemory();}
+                schedule[hour - 1]->setData(roomId, &newLect);//////// check this and change it
+                }catch(std::exception& a){
+                    delete newLect;
+                    throw a;
+                }
+            } catch (std::bad_alloc e) {throw OutOfMemory();}
         }
 		
 		void deleteLecture(int hour, int roomId){
@@ -108,7 +113,7 @@ namespace DataStructures {
 			if(numGroups <= 0 || courseID1 < 1 || courseID1 > courseNum ||courseID2 < 1 || courseID2 > courseNum) throw InvalidInput();
 			course* C1 = courses->getData(courses->find(courseID1));
 			course* C2 = courses->getData(courses->find(courseID2));
-			return C1->competition(*C2, numGroups);
+            return C1->competition(*C2, numGroups) == C1->getCourseID()?courseID1:courseID2;
 		}
 		
 		float getAverageStudent(int hour, int roomId) const {

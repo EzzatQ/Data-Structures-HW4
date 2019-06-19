@@ -22,7 +22,7 @@ namespace DataStructures{
 		int LectureNum;
 		AVLTree<LectureInfo, int>* lectures; //the 2nd int is the groupID;
 		modifiedAVLTree* students;
-		
+       
 	public:
 		course() : StudentNum(0), LectureNum(0), courseID(0), lectures(nullptr), students(nullptr){}
 		course(int number): StudentNum(0), LectureNum(0), courseID(number), lectures(nullptr), students(nullptr){
@@ -120,7 +120,7 @@ namespace DataStructures{
 		bool operator<=(const course& c){
 			return (courseID <= c.courseID);
 		}
-		~course(){delete lectures;}
+        ~course(){delete lectures; delete students;}
 		
 		//// fills a new tree from a sorted array
 		void treeFill_aux(node<LectureInfo, int> * root,node<LectureInfo, int> ** array,int start,int finish){
@@ -137,6 +137,7 @@ namespace DataStructures{
 			}
 		}
 		AVLTree<LectureInfo, int>* treeFill(node<LectureInfo, int> ** array, int m){
+            if(m==0) return nullptr;
 			node<LectureInfo, int> *root = array[m/2];
 			treeFill_aux(root, array, 0, m);
 			return new AVLTree<LectureInfo, int>(root,m);
@@ -167,7 +168,20 @@ namespace DataStructures{
 			modTreeFill_aux(root, array, 0 , m);
 			return new modifiedAVLTree(root,m);
 		}
-		
+        void deleteSubTree1(node<LectureInfo, int>* root){
+            if(root){
+                deleteSubTree1(root->getLeft());
+                deleteSubTree1(root->getRight());
+                delete root;
+            }
+        }
+        void deleteSubTree2(modifiedNode<lecture>* root){
+            if(root){
+                deleteSubTree2(root->getLeft());
+                deleteSubTree2(root->getRight());
+                delete root;
+            }
+        }
 		void merge(course& other){
 			this->StudentNum += other.StudentNum;
 			this->LectureNum += other.LectureNum;
@@ -179,7 +193,7 @@ namespace DataStructures{
 			int A2 = AVL2->getNodeCount();
 			int M1 = MOD1->getNodeCount();
 			int M2 = MOD2->getNodeCount();
-			
+            if(A1 + A2 ==0) return;
 			int count1 = 0;
 			node<LectureInfo, int> ** arrayA1;
 			node<LectureInfo, int> ** arrayA2;
@@ -202,7 +216,10 @@ namespace DataStructures{
 							x++;
 						} else {
 							if(p1[x]->getKey() == p2[y]->getKey()){
-								///////////////////////DLIFOT??????/////////////
+                                delete[] arrayA1;
+                                delete[] arrayA2;
+                                delete[] arrayA3;
+                            
 								throw Failure();
 							}
 							arrayA3[x+y] = p2[y];
@@ -218,8 +235,8 @@ namespace DataStructures{
 				}
 				delete[] arrayA1;
 				delete[] arrayA2;
-				delete this->lectures;
-				delete other.lectures;
+				if(this->lectures)delete this->lectures;
+				if(other.lectures)delete other.lectures;
 				other.lectures = nullptr;
 				this->lectures = treeFill(arrayA3, A1+A2);
 				for (int i = 0; i < A1+A2; i++) {

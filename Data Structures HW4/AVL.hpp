@@ -171,7 +171,7 @@ namespace DataStructures{
 		node<K, D>* root;
 		int nodeCount;
 		
-		void deleteSubTree(node<K,D>* root);
+		
 		void insert_aux(node<K, D>* n, node<K, D>* in);
 		void remove_aux(const K& key, node<K,D>* n);
 		void balance(node<K, D>* n);
@@ -181,6 +181,7 @@ namespace DataStructures{
 		void swapNodes(node<K, D>* a, node<K, D>* b);
 		
 	public:
+       
 		AVLTree(): root(nullptr), nodeCount(0){}
         AVLTree(node<K, D>* newRoot, int nodeCount):root(nullptr), nodeCount(nodeCount){
             root = copyNodes(newRoot, nullptr); 
@@ -221,6 +222,7 @@ namespace DataStructures{
 			if(n->getBF() < -1 || n->getBF() > 1) return false;
 			else return isBalanced_aux(n->getLeft()) && isBalanced_aux(n->getRight());
 		}
+         void deleteSubTree(node<K,D>* root);
 	};
 	
 	template<class K, class D>

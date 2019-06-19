@@ -169,8 +169,8 @@ namespace DataStructures{
 	class modifiedAVLTree {
 		modifiedNode<lecture>* root;
 		int nodeCount;
-
-		void deleteSubTree(modifiedNode<lecture>* root);
+        
+		
 		void insert_aux(modifiedNode<lecture>* n, modifiedNode<lecture>* in);
 		int remove_aux(const lecture& key, modifiedNode<lecture>* n);
 		void balance(modifiedNode<lecture>* n);
@@ -180,6 +180,7 @@ namespace DataStructures{
 		void swapNodes(modifiedNode<lecture>* a, modifiedNode<lecture>* b);
 		int findMaxStudentsAux(int numLect, int collected, int studentSum, modifiedNode<lecture>* curr);
 	public:
+        
 		modifiedAVLTree(): root(nullptr), nodeCount(0){}
 		
         modifiedAVLTree(modifiedNode<lecture>* newRoot, int nodeCount):root(nullptr), nodeCount(nodeCount){
@@ -215,7 +216,7 @@ namespace DataStructures{
 			if(n->getBF() < -1 || n->getBF() > 1) return false;
 			else return isBalanced_aux(n->getLeft()) && isBalanced_aux(n->getRight());
 		}
-		
+		void deleteSubTree(modifiedNode<lecture>* root);
 		int findMaxStudents(int numLect);
 	};
 

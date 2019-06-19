@@ -99,7 +99,7 @@ namespace DataStructures{
 			return D();
         }
 		
-		void setData(int key, D data){
+		void setData(int key, D* data){
 			dataNode<int, D>* res = find_aux(key);
 			if(!res) throw DoesNotExist();
 			res->setData(data);
@@ -144,7 +144,9 @@ namespace DataStructures{
         }
 		
         ~hashTable(){
-            
+            for (int i = 0; i < size; i ++) {
+                delete array[i];
+            }
             delete [] array;
         }
     };
