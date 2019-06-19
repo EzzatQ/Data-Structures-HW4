@@ -50,9 +50,10 @@ namespace DataStructures{
         }
         bool operator>(const lecture& li) const {
             if(numStudents > li.numStudents) return true;
-            if(numStudents == li.numStudents && courseId > li.courseId) return true;
+            if(numStudents == li.numStudents && groupId > li.groupId) return true;
             if(numStudents == li.numStudents && groupId == li.groupId && roomId > li.roomId) return true;
             if(numStudents == li.numStudents && groupId == li.groupId && roomId == li.roomId && hour > li.hour) return true;
+            if(numStudents == li.numStudents && groupId == li.groupId && roomId == li.roomId && hour == li.hour && courseId > li.courseId) return true;
             return false;
         }
         bool operator<(const lecture& li) const {
@@ -60,6 +61,7 @@ namespace DataStructures{
             if(numStudents == li.numStudents && courseId < li.courseId) return true;
             if(numStudents == li.numStudents && groupId == li.groupId && roomId < li.roomId) return true;
             if(numStudents == li.numStudents && groupId == li.groupId && roomId == li.roomId && hour < li.hour) return true;
+            if(numStudents == li.numStudents && groupId == li.groupId && roomId == li.roomId && hour == li.hour && courseId < li.courseId) return true;
             return false;
         }
         bool operator>=(const lecture& li) const {

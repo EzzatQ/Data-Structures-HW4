@@ -89,8 +89,9 @@ namespace DataStructures {
 			lecture* booked = schedule[hour - 1]->find(roomId);
 			if(!booked) throw Failure();
 			course* CRS = courses->getData(courses->find(booked->getCourse()));
-			CRS->removeLecture(*booked);
 			schedule[hour - 1]->setData(roomId, nullptr);
+            CRS->removeLecture(*booked);
+			
 		}
 		
 		void mergeCourses(int course1, int course2){
@@ -104,7 +105,7 @@ namespace DataStructures {
 		}
 		
 		int competition(int courseID1, int courseID2, int numGroups) const {
-			if(numGroups <= 0 || courseID1 < 1 || courseID1 > courseNum ||courseID1 < 1 || courseID1 > courseNum) throw InvalidInput();
+			if(numGroups <= 0 || courseID1 < 1 || courseID1 > courseNum ||courseID2 < 1 || courseID2 > courseNum) throw InvalidInput();
 			course* C1 = courses->getData(courses->find(courseID1));
 			course* C2 = courses->getData(courses->find(courseID2));
 			return C1->competition(*C2, numGroups);

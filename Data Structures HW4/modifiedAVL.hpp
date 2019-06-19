@@ -329,12 +329,12 @@ namespace DataStructures{
 		}
 		else if(n->getRight()){
             n->setLecturesOnTheRight((n->getLecturesOnTheRight() + 1));
-            n->setStudentsOnTheRight((n->getLecturesOnTheRight() + in->getData()));
+            n->setStudentsOnTheRight((n->getStudentsOnTheRight() + in->getData()));
 			modifiedAVLTree::insert_aux(n->getRight(), in);
 		}
 		else {
             n->setLecturesOnTheRight((n->getLecturesOnTheRight() + 1));
-            n->setStudentsOnTheRight((n->getLecturesOnTheRight() + in->getData()));
+            n->setStudentsOnTheRight((n->getStudentsOnTheRight() + in->getData()));
 			n->setRight(in);
 			in->setParent(n);
 			n->update();
@@ -474,11 +474,13 @@ namespace DataStructures{
 	}
 
 	int modifiedAVLTree::findMaxStudentsAux(int numLect, int collected, int studentSum, modifiedNode<lecture>* curr){
-		if(numLect == collected) return studentSum;
+        
+		if(numLect == collected || !curr) return studentSum;
 		if(curr->getLecturesOnTheRight() > numLect - collected) return findMaxStudentsAux(numLect, collected, studentSum, curr->getRight());
 		if(curr->getLecturesOnTheRight() == numLect - collected) return studentSum + curr->getStudentsOnTheRight();
+        if(curr->getLecturesOnTheRight() < numLect - collected) return findMaxStudentsAux(numLect, collected + curr->getLecturesOnTheRight() + 1, studentSum + curr->getStudentsOnTheRight() + curr->getData(), curr->getLeft());
 		if(!curr->getLeft() && collected <= numLect) return studentSum + curr->getData();
-		if(curr->getLecturesOnTheRight() < numLect - collected) return findMaxStudentsAux(numLect, collected + curr->getLecturesOnTheRight() + 1, studentSum + curr->getStudentsOnTheRight() + curr->getData(), curr->getLeft());
+		
 		return studentSum;
 	}
 	

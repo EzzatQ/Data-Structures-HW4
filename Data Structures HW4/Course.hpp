@@ -75,10 +75,15 @@ namespace DataStructures{
 		
 		
 		int competition(course& other, int numGroups){
+            if(*this == other) throw Failure();
 			int thisMax = students->findMaxStudents(numGroups);
 			int otherMax = other.students->findMaxStudents(numGroups);
 			if(thisMax < otherMax) return other.courseID;
-			else return this->courseID;
+            else {
+                if(thisMax == otherMax) return other.courseID > this->courseID? other.courseID:this->courseID;
+                else
+                return this->courseID;
+            }
 		}
 		
 		float getAverageStudents() const{
@@ -142,6 +147,7 @@ namespace DataStructures{
 			root->setRight(nullptr);
 			int middle = start+(finish - start)/2;
 			int x1 = 0, x2 = 0;
+            root->setStudentsOnTheRight(0);
 			if(middle - start > 1 || (start == 0 && middle - start == 1)){
 				root->setLeft(array[start+(middle-start)/2]);
 				x1 = modTreeFill_aux(root->getLeft(),array,start,middle);
@@ -149,9 +155,9 @@ namespace DataStructures{
 			if(finish-middle>1){
 				root->setRight(array[middle+(finish-middle)/2]);
 				x2 = modTreeFill_aux(root->getRight(),array,middle,finish);
+                root->setStudentsOnTheRight(x2);
 			}
-			root->setStudentsOnTheRight(x1);
-			root->setLecturesOnTheRight(finish - (start+(finish - start)/2));
+			root->setLecturesOnTheRight(finish - (start+(finish - start)/2)-1);
 			return x1 + x2 + root->getKey().getNumStudents();
 		}
 		
