@@ -67,7 +67,7 @@ namespace DataStructures{
 		void removeLecture(const lecture& lect){
 			if(students->remove(lect) == 0) throw Failure();
 			lectures->remove(LectureInfo(lect.getGroup(), lect.getHour()));
-			students->remove(lect);
+			//students->remove(lect);
 			StudentNum -= lect.getNumStudents();
 			LectureNum--;
 			
