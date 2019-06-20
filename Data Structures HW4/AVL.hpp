@@ -245,7 +245,7 @@ namespace DataStructures{
     }
 	template<class K, class D>
     void AVLTree<K,D>::fillAnArray(node<K, D>** array){
-        int * a= new int(0);
+        int * a = new int(0);
         fillAnArray_aux(array, this->root, a);
         delete a;
     }

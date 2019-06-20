@@ -22,7 +22,7 @@ namespace DataStructures{
 		int LectureNum;
 		AVLTree<LectureInfo, int>* lectures; //the 2nd int is the groupID;
 		modifiedAVLTree* students;
-       
+		
 	public:
 		course() : courseID(0), StudentNum(0), LectureNum(0), lectures(nullptr), students(nullptr){}
 		course(int number): courseID(number), StudentNum(0), LectureNum(0), lectures(nullptr), students(nullptr){
@@ -67,6 +67,7 @@ namespace DataStructures{
 		void removeLecture(const lecture& lect){
 			if(students->remove(lect) == 0) throw Failure();
 			lectures->remove(LectureInfo(lect.getGroup(), lect.getHour()));
+			students->remove(lect);
 			StudentNum -= lect.getNumStudents();
 			LectureNum--;
 			
@@ -75,15 +76,15 @@ namespace DataStructures{
 		
 		
 		int competition(course& other, int numGroups){
-            if(*this == other) throw Failure();
+			if(*this == other) throw Failure();
 			int thisMax = students->findMaxStudents(numGroups);
 			int otherMax = other.students->findMaxStudents(numGroups);
 			if(thisMax < otherMax) return other.courseID;
-            else {
-                if(thisMax == otherMax) return other.courseID > this->courseID ? other.courseID : this->courseID;
-                else
-                return this->courseID;
-            }
+			else {
+				if(thisMax == otherMax) return other.courseID > this->courseID ? other.courseID : this->courseID;
+				else
+					return this->courseID;
+			}
 		}
 		
 		float getAverageStudents() const{
@@ -120,7 +121,7 @@ namespace DataStructures{
 		bool operator<=(const course& c){
 			return (courseID <= c.courseID);
 		}
-        ~course(){delete lectures; delete students;}
+		~course(){delete lectures; delete students;}
 		
 		//// fills a new tree from a sorted array
 		void treeFill_aux(node<LectureInfo, int> * root,node<LectureInfo, int> ** array,int start,int finish){
@@ -137,7 +138,7 @@ namespace DataStructures{
 			}
 		}
 		AVLTree<LectureInfo, int>* treeFill(node<LectureInfo, int> ** array, int m){
-            if(m==0) return nullptr;
+			if(m==0) return nullptr;
 			node<LectureInfo, int> *root = array[m/2];
 			treeFill_aux(root, array, 0, m);
 			return new AVLTree<LectureInfo, int>(root,m);
@@ -148,7 +149,7 @@ namespace DataStructures{
 			root->setRight(nullptr);
 			int middle = start+(finish - start)/2;
 			int x1 = 0, x2 = 0;
-            root->setStudentsOnTheRight(0);
+			root->setStudentsOnTheRight(0);
 			if(middle - start > 1 || (start == 0 && middle - start == 1)){
 				root->setLeft(array[start+(middle-start)/2]);
 				x1 = modTreeFill_aux(root->getLeft(),array,start,middle);
@@ -156,7 +157,7 @@ namespace DataStructures{
 			if(finish-middle>1){
 				root->setRight(array[middle+(finish-middle)/2]);
 				x2 = modTreeFill_aux(root->getRight(),array,middle,finish);
-                root->setStudentsOnTheRight(x2);
+				root->setStudentsOnTheRight(x2);
 			}
 			root->setLecturesOnTheRight(finish - (start+(finish - start)/2)-1);
 			return x1 + x2 + root->getKey().getNumStudents();
@@ -168,20 +169,20 @@ namespace DataStructures{
 			modTreeFill_aux(root, array, 0 , m);
 			return new modifiedAVLTree(root,m);
 		}
-        void deleteSubTree1(node<LectureInfo, int>* root){
-            if(root){
-                deleteSubTree1(root->getLeft());
-                deleteSubTree1(root->getRight());
-                delete root;
-            }
-        }
-        void deleteSubTree2(modifiedNode<lecture>* root){
-            if(root){
-                deleteSubTree2(root->getLeft());
-                deleteSubTree2(root->getRight());
-                delete root;
-            }
-        }
+		void deleteSubTree1(node<LectureInfo, int>* root){
+			if(root){
+				deleteSubTree1(root->getLeft());
+				deleteSubTree1(root->getRight());
+				delete root;
+			}
+		}
+		void deleteSubTree2(modifiedNode<lecture>* root){
+			if(root){
+				deleteSubTree2(root->getLeft());
+				deleteSubTree2(root->getRight());
+				delete root;
+			}
+		}
 		void merge(course& other){
 			this->StudentNum += other.StudentNum;
 			this->LectureNum += other.LectureNum;
@@ -193,7 +194,7 @@ namespace DataStructures{
 			int A2 = AVL2->getNodeCount();
 			int M1 = MOD1->getNodeCount();
 			int M2 = MOD2->getNodeCount();
-            if(A1 + A2 ==0) return;
+			if(A1 + A2 ==0) return;
 			int count1 = 0;
 			node<LectureInfo, int> ** arrayA1;
 			node<LectureInfo, int> ** arrayA2;
@@ -216,10 +217,10 @@ namespace DataStructures{
 							x++;
 						} else {
 							if(p1[x]->getKey() == p2[y]->getKey()){
-                                delete[] arrayA1;
-                                delete[] arrayA2;
-                                delete[] arrayA3;
-                            
+								delete[] arrayA1;
+								delete[] arrayA2;
+								delete[] arrayA3;
+								
 								throw Failure();
 							}
 							arrayA3[x+y] = p2[y];
@@ -244,8 +245,21 @@ namespace DataStructures{
 				}
 				delete []arrayA3;
 			} catch(std::bad_alloc e){
-				if(count1 == 1) delete[] arrayA1;
-				if(count1 == 2){ delete[] arrayA1; delete[] arrayA2;}
+				if(count1 == 1){
+					for (int i = 0; i < A1; i++) {
+						delete arrayA1[i];
+					}
+					delete[] arrayA1;
+				}
+				if(count1 == 2){
+					for (int i = 0; i < A1; i++) {
+						delete arrayA1[i];
+					}
+					delete[] arrayA1;
+					for (int i = 0; i < A2; i++) {
+						delete arrayA2[i];
+					}
+					delete[] arrayA2;}
 				throw OutOfMemory();
 			}
 			int count2 = 0;
@@ -279,8 +293,8 @@ namespace DataStructures{
 						z++;
 					}
 				}
-				delete[] arrayM1;
-				delete[] arrayM2;
+				delete [] arrayM1;
+				delete [] arrayM2;
 				delete this->students;
 				delete other.students;
 				other.students = nullptr;
@@ -290,12 +304,24 @@ namespace DataStructures{
 				}
 				delete [] arrayM3;
 			} catch(std::bad_alloc e){
-				if(count2 == 1) delete[] arrayM1;
-				if(count2 == 2){ delete[] arrayM1; delete[] arrayM2;}
+				if(count2 == 1){
+					for (int i = 0; i < M1; i++) {
+						delete arrayM1[i];
+					}
+					delete[] arrayM1;
+				}
+				if(count2 == 2){
+					for (int i = 0; i < M1; i++) {
+						delete arrayM1[i];
+					}
+					delete[] arrayM1;
+					for (int i = 0; i < M2; i++) {
+						delete arrayM2[i];
+					}
+					delete[] arrayM2;}
 				throw OutOfMemory();
 			}
 		}
-		///////////////////////
 	};
 	
 }

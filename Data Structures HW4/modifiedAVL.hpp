@@ -230,7 +230,7 @@ namespace DataStructures{
         if(!curr->getLeft()){
             array[*i] = new modifiedNode<lecture>(*curr);
           ++(*i);
-            if(curr->getRight())  fillAnArray_aux(array, curr->getRight(), i);
+            if(curr->getRight()) fillAnArray_aux(array, curr->getRight(), i);
             return;
         }
         fillAnArray_aux(array, curr->getLeft(), i);
