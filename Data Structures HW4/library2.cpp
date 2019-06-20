@@ -51,6 +51,7 @@ StatusType addLecture(void *DS, int courseID, int groupID, int roomID, int hour,
 	}
 	catch(InvalidInput e){ return INVALID_INPUT;}
 	catch(OutOfMemory e){return ALLOCATION_ERROR;}
+	catch(AlreadyExists e){ return FAILURE;}
 	catch(DoesNotExist e){ return FAILURE;}
 	catch(Failure e){return FAILURE;}
 	return SUCCESS;

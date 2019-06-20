@@ -35,7 +35,7 @@ namespace DataStructures{
 		int BF;
 		int height;
         void setHeight(int newh){if(newh > 0) height = newh;}
-        modifiedNode(const K& key, int data): key(nullptr), data(0), parent(nullptr), left(nullptr), right(nullptr),studentsOntheRight(0),lecturesOntheRight(0) ,kids(0), BF(0), height(0){
+        modifiedNode(const K& key, int data): key(nullptr), data(0), studentsOntheRight(0), lecturesOntheRight(0) ,parent(nullptr), left(nullptr), right(nullptr),kids(0), BF(0), height(0){
 			try{
 				this->key = new K(key);
                 this->data = data;

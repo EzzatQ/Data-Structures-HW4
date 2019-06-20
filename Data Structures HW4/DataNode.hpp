@@ -23,20 +23,28 @@ namespace DataStructures{
         D* data;
         dataNode* next;
     public:
-        dataNode(const K& key, D* data = D()): key(nullptr), data(nullptr),next(nullptr){
-            try{
-                this->key = new K(key);
-                if(data) this->data = new D(*data);
-                else data = nullptr;
-            } catch (std::bad_alloc e){ throw OutOfMemory();}
+        dataNode(const K& k, D& dat): key(nullptr), data(nullptr),next(nullptr){
+			int counter = 0;
+			try{
+				if(k) {key = new K(k); counter++;}
+				else key = nullptr;
+				data = new D(dat);
+            } catch (std::bad_alloc e){
+				if(counter == 1) delete key;
+				throw OutOfMemory();}
         }
 		
         dataNode(dataNode& n){
-            try{
-                this->key = new K(*n.key);
-                this->data = new D(*n.data);
+			int counter = 0;
+			try{
+				if(this->key){ this->key = new K(*n.key); counter++;}
+				else this->key = nullptr;
+                if(this->data) this->data = new D(*n.data);
+				else this->data = nullptr;
                 next = n->next;
-            } catch (std::bad_alloc e){ throw OutOfMemory();}
+            } catch (std::bad_alloc e){
+				if(counter == 1) delete this->key;
+				throw OutOfMemory();}
         }
         dataNode& operator=(const dataNode& n){
             if(*this == n) return &this;
@@ -55,23 +63,26 @@ namespace DataStructures{
         }
         
         K& getKey() { return *key;}
-        D& getData() { return *data;}
+        D& getData() {return *data;}
         D* getDataPtr(){return data;}
         K* getKeyPtr(){return key;}
 		dataNode* getNext(){return next;}
+		
         void setKey(K& k){
 			if(key) delete key;
             try{
-                key = new K(k);
+                if(k) key = new K(k);
+				else key = nullptr;
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
         
-        void setData(D* dat){
+        void setData(D& dat){
             if(data) delete data;
             try{
-                this->data = data;
+                this->data = new D(dat);///////////////////////////////
             } catch (std::bad_alloc e){ throw OutOfMemory();}
         }
+		
         void setNext(dataNode* n){next = n;}
     };
 };

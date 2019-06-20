@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		521D75CF22B93C06004D3692 /* library2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 524A962C22B004DC003159F2 /* library2.cpp */; };
-		5227B84D22B94C9800CF8F01 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5227B84C22B94C9800CF8F01 /* test.cpp */; };
+		52220A5A22BBA4C600BF0F36 /* test4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52220A5922BBA4C600BF0F36 /* test4.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +29,7 @@
 		520B69AB22B56B5500CC94D3 /* DataNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataNode.hpp; sourceTree = "<group>"; };
 		520B69AC22B6437000CC94D3 /* modifiedAVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modifiedAVL.hpp; sourceTree = "<group>"; };
 		520B69B022B6C3AD00CC94D3 /* modSched.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modSched.hpp; sourceTree = "<group>"; };
+		52220A5922BBA4C600BF0F36 /* test4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test4.cpp; sourceTree = "<group>"; };
 		5225C7A422B8CA4C0010E80A /* AVL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVL.hpp; sourceTree = "<group>"; };
 		5225C7D522B923720010E80A /* main2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main2.cpp; sourceTree = "<group>"; };
 		5227B84C22B94C9800CF8F01 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		528A65E122A67336008BC0FF /* Data Structures HW4 */ = {
 			isa = PBXGroup;
 			children = (
+				52220A5922BBA4C600BF0F36 /* test4.cpp */,
 				5227B84C22B94C9800CF8F01 /* test.cpp */,
 				528A65E922A67531008BC0FF /* in2.txt */,
 				528A65EC22A67532008BC0FF /* out2.txt */,
@@ -158,7 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				521D75CF22B93C06004D3692 /* library2.cpp in Sources */,
-				5227B84D22B94C9800CF8F01 /* test.cpp in Sources */,
+				52220A5A22BBA4C600BF0F36 /* test4.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,7 +26,10 @@ namespace DataStructures{
             if(t == 1) size = size * 2;
             else    size = size / 2;
             array = new (std::nothrow) dataNode<int, D>*[size];
-            if(!array) {throw OutOfMemory();}
+            if(!array) {
+				emptyAnArray(old_array, old_size);
+				delete [] old_array;
+				throw OutOfMemory();}
             for (int i = 0; i < size; i++) {
                 array[i] = nullptr;
             }
@@ -39,10 +42,13 @@ namespace DataStructures{
                     dataNode<int, D> * curr = old_array[i];
                     while(curr){
                         try{
-                            insert(curr->getKey(), &(curr->getData()));
+                            insert(curr->getKey(), curr->getData());
                         }catch(OutOfMemory a){
                             emptyAnArray(old_array, old_size);
                             delete [] old_array;
+							emptyAnArray(array, size);
+							delete [] array;
+							throw OutOfMemory();
                         }
                         curr = curr->getNext();
                     }
@@ -79,8 +85,9 @@ namespace DataStructures{
 		
     public:
         hashTable(int n = 10): size(n){
-            array = new (std::nothrow) dataNode<int, D>*[n];
-            if(!array) throw OutOfMemory();
+			try{
+			array = new dataNode<int, D>*[n];
+			} catch (std::bad_alloc e) {throw OutOfMemory();}
             for (int i = 0; i < size; i++) {
                 array[i] = nullptr;
             }
@@ -92,20 +99,20 @@ namespace DataStructures{
 			return find_aux(key);
 		}
 		
-        D find(int key){
+        D& find(int key){
 			dataNode<int, D>* res = find_aux(key);
 			if(!res) throw DoesNotExist();
-			if(res->getDataPtr()) return *(res->getDataPtr());
-			return D();
+			return res->getData();
+
         }
 		
-		void setData(int key, D* data){
+		void setData(int key, D& data){
 			dataNode<int, D>* res = find_aux(key);
 			if(!res) throw DoesNotExist();
 			res->setData(data);
 		}
 		
-        void insert(int key, D* data){
+        void insert(int key, D& data){
 			try{
 				find(key);
 				throw AlreadyExists();

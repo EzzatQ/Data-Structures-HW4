@@ -120,7 +120,7 @@ void Test_DeleteLecture(){
     {
         assert(deleteLecture(DS,i,10)==SUCCESS);
     }
-    assert(deleteRoom(DS,10)==FAILURE);
+    assert(deleteRoom(DS,10)== FAILURE);
     assert(deleteLecture(DS,5,10)==SUCCESS);
     assert(deleteRoom(DS,10)==SUCCESS);
     assert(deleteLecture(DS,4,10)==FAILURE);
@@ -840,77 +840,77 @@ int main(int argc, const char**argv) {
     Quit(&d);
     
     
-//    cout << "Welcome to the tests for wet2" << endl;
-//    cout << " Good Luck." << endl;
-//
-//    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-//         << endl;
-//
-//    cout << "Testing sagal_test" << endl;
-//    Sagal_Test();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//    cout << "Testing Init And Quit" << endl;
-//    Test_Init_And_Quit();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//    cout << "Testing AddLecture" << endl;
-//    Test_AddLecture();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//    cout << "Testing DeleteLecture" << endl;
-//    Test_DeleteLecture();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//    cout << "Testing merge_courses" << endl;
-//    Test_merge_courses();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//    cout << "Testing competition_And_Average" << endl;
-//    Test_competition_And_Average();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//    cout << "FINAL TEST!!" << endl;
-//    Final_test();
-//    cout << "PASSED!!!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//
-//
-//
-//    cout << "well done! you did it!" << endl;
-//
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "." << endl;
-//    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-//         << endl;
+    cout << "Welcome to the tests for wet2" << endl;
+    cout << " Good Luck." << endl;
+
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+         << endl;
+
+    cout << "Testing sagal_test" << endl;
+    Sagal_Test();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+    cout << "Testing Init And Quit" << endl;
+    Test_Init_And_Quit();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+    cout << "Testing AddLecture" << endl;
+    Test_AddLecture();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+    cout << "Testing DeleteLecture" << endl;
+    Test_DeleteLecture();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+    cout << "Testing merge_courses" << endl;
+    Test_merge_courses();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+    cout << "Testing competition_And_Average" << endl;
+    Test_competition_And_Average();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+    cout << "FINAL TEST!!" << endl;
+    Final_test();
+    cout << "PASSED!!!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+
+
+
+    cout << "well done! you did it!" << endl;
+
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "." << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+         << endl;
 //
 
     return 0;

@@ -24,8 +24,8 @@ namespace DataStructures{
 		modifiedAVLTree* students;
        
 	public:
-		course() : StudentNum(0), LectureNum(0), courseID(0), lectures(nullptr), students(nullptr){}
-		course(int number): StudentNum(0), LectureNum(0), courseID(number), lectures(nullptr), students(nullptr){
+		course() : courseID(0), StudentNum(0), LectureNum(0), lectures(nullptr), students(nullptr){}
+		course(int number): courseID(number), StudentNum(0), LectureNum(0), lectures(nullptr), students(nullptr){
 			try{
 				lectures = new AVLTree<LectureInfo, int>();
 				students = new modifiedAVLTree();
@@ -80,7 +80,7 @@ namespace DataStructures{
 			int otherMax = other.students->findMaxStudents(numGroups);
 			if(thisMax < otherMax) return other.courseID;
             else {
-                if(thisMax == otherMax) return other.courseID > this->courseID? other.courseID:this->courseID;
+                if(thisMax == otherMax) return other.courseID > this->courseID ? other.courseID : this->courseID;
                 else
                 return this->courseID;
             }

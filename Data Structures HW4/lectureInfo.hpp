@@ -19,6 +19,8 @@ namespace DataStructures{
         int hour;
         int numStudents;
     public:
+		lecture(): courseId(-1), groupId(-1), roomId(-1), hour(-1), numStudents(-1){}
+		
         lecture(int courseId, int groupId, int roomId, int hour, int numStudents):courseId(courseId), groupId(groupId), roomId(roomId), hour(hour), numStudents(numStudents){
             if(courseId < 0 || groupId < 0 || roomId <= 0 || hour < 0 || numStudents < 0)
                 throw IllegalInitialization();
@@ -48,6 +50,11 @@ namespace DataStructures{
         bool operator==(const lecture& li) const {
             return (groupId == li.groupId && roomId == li.roomId && hour == li.hour && numStudents == li.numStudents);
         }
+		
+		bool operator!=(const lecture& li) const {
+			return !(this->operator==(li));
+		}
+		
         bool operator>(const lecture& li) const {
             if(numStudents > li.numStudents) return true;
             if(numStudents == li.numStudents && groupId > li.groupId) return true;
