@@ -89,11 +89,11 @@ namespace DataStructures{
 		int size;
 
 	public:
-		unionFind(int n, T data[]): size(n){
+		unionFind(int n, T* data[]): size(n){
 			try {
 				arr = new UFNode<T>*[size];
 				for(int i = 0; i < size; i++){
-					UFNode<T>* tempNode = new UFNode<T>(i + 1, &data[i]);
+					UFNode<T>* tempNode = new UFNode<T>(i + 1, data[i]);
 					arr[i] = tempNode;
 				}
 			} catch (std::bad_alloc e){ throw OutOfMemory();}
@@ -119,7 +119,7 @@ namespace DataStructures{
 			for(int i = 0; i < size; i++){
 				delete arr[i];
 			}
-			delete arr;
+			delete []arr;
 		}
 
 		int find(int x){

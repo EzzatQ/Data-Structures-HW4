@@ -194,8 +194,10 @@ namespace DataStructures{
 			int A2 = AVL2->getNodeCount();
 			int M1 = MOD1->getNodeCount();
 			int M2 = MOD2->getNodeCount();
+            
 			if(A1 + A2 ==0) return;
 			int count1 = 0;
+            
 			node<LectureInfo, int> ** arrayA1;
 			node<LectureInfo, int> ** arrayA2;
 			node<LectureInfo, int> ** arrayA3;
@@ -204,11 +206,13 @@ namespace DataStructures{
 				arrayA1 = new node<LectureInfo, int> *[A1];
 				arrayA2 = new node<LectureInfo, int> *[A2];
 				arrayA3 = new node<LectureInfo, int> *[A1+A2];
+                
 				AVL1->fillAnArray(arrayA1);
 				AVL2->fillAnArray(arrayA2);
+                
 				node<LectureInfo, int> ** p1 = arrayA1;
 				node<LectureInfo, int> ** p2 = arrayA2;
-				
+                
 				int x=0, y=0;
 				while(x+y < A1+A2){
 					if(x < A1 && y < A2){
@@ -217,10 +221,15 @@ namespace DataStructures{
 							x++;
 						} else {
 							if(p1[x]->getKey() == p2[y]->getKey()){
+                                for (int i = 0; i < A1; i++) {
+                                    delete arrayA1[i];
+                                }
+                                for (int i = 0; i < A2; i++) {
+                                    delete arrayA2[i];
+                                }
 								delete[] arrayA1;
 								delete[] arrayA2;
 								delete[] arrayA3;
-								
 								throw Failure();
 							}
 							arrayA3[x+y] = p2[y];
@@ -234,15 +243,17 @@ namespace DataStructures{
 						x++;
 					}
 				}
-				delete[] arrayA1;
-				delete[] arrayA2;
-				if(this->lectures)delete this->lectures;
-				if(other.lectures)delete other.lectures;
-				other.lectures = nullptr;
-				this->lectures = treeFill(arrayA3, A1+A2);
+                AVLTree<LectureInfo, int> * tmp11 = treeFill(arrayA3, A1+A2);
+                if(this->lectures)delete this->lectures;
+                if(other.lectures)delete other.lectures;
+                other.lectures = nullptr;
+                this->lectures = new  AVLTree<LectureInfo, int>(*tmp11);
+                delete tmp11;
 				for (int i = 0; i < A1+A2; i++) {
 					delete arrayA3[i];
 				}
+                delete[] arrayA1;
+                delete[] arrayA2;
 				delete []arrayA3;
 			} catch(std::bad_alloc e){
 				if(count1 == 1){
@@ -293,15 +304,19 @@ namespace DataStructures{
 						z++;
 					}
 				}
-				delete [] arrayM1;
-				delete [] arrayM2;
-				delete this->students;
-				delete other.students;
-				other.students = nullptr;
-				this->students = modTreeFill(arrayM3, M1+M2);
+
+				
+                modifiedAVLTree * tmp1 = modTreeFill(arrayM3, M1+M2);
+                delete this->students;
+                delete other.students;
+                other.students = nullptr;
+                this->students = new modifiedAVLTree(*tmp1); //check the same
+                delete tmp1;
 				for (int i = 0; i < M1+M2; i++) {
 					delete arrayM3[i];
 				}
+                delete [] arrayM1;
+                delete [] arrayM2;
 				delete [] arrayM3;
 			} catch(std::bad_alloc e){
 				if(count2 == 1){

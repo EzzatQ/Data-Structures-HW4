@@ -30,13 +30,16 @@ namespace DataStructures {
 				for (int j = 0; j < 10; j++) {
 					schedule[j] = new hashTable<lecture>;
 				}
-				course* arr = new course[n];
+				course** arr = new course*[n];
 				for (int i = 1; i <= n; i++) {
 					course* temp = new course(i);
-					arr[i-1] = *temp;
-					delete temp;
+					arr[i-1] = temp;
+//                    delete temp; what?
 				}
 				courses = new unionFind<course>(n,arr);
+                for (int i = 1; i <= n; i++) {
+                    delete arr[i-1];
+                }
 				delete [] arr;
 			} catch(std::bad_alloc e){ throw OutOfMemory();}
 		}
@@ -45,7 +48,7 @@ namespace DataStructures {
 			for (int i = 0; i < 10; i++) {
 				delete schedule[i];
 			}
-			delete schedule;
+			delete [] schedule;
 			delete courses;
 		}
 		
@@ -80,15 +83,14 @@ namespace DataStructures {
 			lecture booked = schedule[hour - 1]->find(roomId);
 			if(booked != lecture()) throw Failure();
 			try{
-				lecture* newLect = new lecture(courseId, groupId, roomId, hour, numStudents);
+				lecture newLect = lecture(courseId, groupId, roomId, hour, numStudents);
 				try{
 					course* CRS = courses->getData(courses->find(courseId));
 					try{
-						CRS->addLecture(*newLect);
-					} catch(AlreadyExists e){ delete newLect; throw Failure();}
-					schedule[hour - 1]->setData(roomId, *newLect);//////// check this and change it
-					delete newLect;
-				} catch (DoesNotExist e){ delete newLect; throw Failure();}
+						CRS->addLecture(newLect);
+					} catch(AlreadyExists e){ throw Failure();}
+					schedule[hour - 1]->setData(roomId, newLect);//////// check this and change it
+				} catch (DoesNotExist e){ throw Failure();}
 			} catch (std::bad_alloc e) {throw OutOfMemory();}
 		}
 		
