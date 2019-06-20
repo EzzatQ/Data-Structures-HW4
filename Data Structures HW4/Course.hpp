@@ -57,8 +57,8 @@ namespace DataStructures{
 		
 		void addLecture(const lecture& lect){
 			try{
-				lectures->insert(LectureInfo(lect.getGroup(), lect.getHour()),courseID);
 				students->insert(lect, lect.getNumStudents());
+                lectures->insert(LectureInfo(lect.getGroup(), lect.getHour()),courseID);
 			} catch(AlreadyExists e) {throw Failure();}
 			StudentNum += lect.getNumStudents();
 			LectureNum++;
